@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/preventive-maintenance-system.iml" filepath="$PROJECT_DIR$/.idea/preventive-maintenance-system.iml" />
-      <module fileurl="file://$PROJECT_DIR$/system/system.iml" filepath="$PROJECT_DIR$/system/system.iml" />
     </modules>
   </component>
 </project>
