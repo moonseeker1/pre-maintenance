@@ -11,7 +11,7 @@
     <modules>
         <module>admin</module>
         <module>common</module>
-        <module>security</module>
+        <module>repair_person</module>
         <module>security</module>
     </modules>
     <properties>

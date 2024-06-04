@@ -13,6 +13,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.6.13</spring-boot.version>
     </properties>
+    <parent>
+        <groupId>nwpu</groupId>
+        <artifactId>system</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -54,7 +59,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.system.admin.AdminApplication</mainClass>
+                    <mainClass>com.system.security.admin.AdminApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>

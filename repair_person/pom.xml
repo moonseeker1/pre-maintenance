@@ -54,7 +54,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.system.repair_person.RepairPersonApplication</mainClass>
+                    <mainClass>com.system.security.repair_person.RepairPersonApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>
