@@ -1,4 +1,4 @@
-package com.system.security.repair_person;
+package com.system.repair_person;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

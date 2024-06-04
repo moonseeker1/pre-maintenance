@@ -1,4 +1,4 @@
-package com.system.security.repair_person;
+package com.system.repair_person;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
