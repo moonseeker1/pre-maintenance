@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/admin")
+//
 public class AdminController {
     @Autowired
     AdminServiceImpl adminService;
