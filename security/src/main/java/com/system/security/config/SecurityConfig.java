@@ -1,6 +1,6 @@
 package com.system.security.config;
 
-import com.macro.mall.security.component.*;
+import com.system.security.component.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
