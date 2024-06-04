@@ -1,9 +1,9 @@
 package com.system.admin.config;
 
 
+import com.system.admin.mapper.ResourceMapper;
 import com.system.admin.model.Resource;
 import com.system.admin.service.IAdminService;
-import com.system.admin.service.IResourceService;
 import com.system.security.component.DynamicSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +25,7 @@ public class MallSecurityConfig {
     @Autowired
     private IAdminService adminService;
     @Autowired
-    private IResourceService resourceService;
+    private ResourceMapper resourceMapper;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -39,7 +39,7 @@ public class MallSecurityConfig {
             @Override
             public Map<String, ConfigAttribute> loadDataSource() {
                 Map<String, ConfigAttribute> map = new ConcurrentHashMap<>();
-                List<Resource> resourceList = resourceService.listAll();
+                List<Resource> resourceList = resourceMapper.list();
                 for (Resource resource : resourceList) {
                     map.put(resource.getUrl(), new org.springframework.security.access.SecurityConfig(resource.getId() + ":" + resource.getName()));
                 }

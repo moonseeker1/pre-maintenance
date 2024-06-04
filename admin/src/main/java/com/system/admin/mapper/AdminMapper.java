@@ -1,7 +1,7 @@
 package com.system.admin.mapper;
 
-import com.system.admin.model.Admin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.system.admin.model.Admin;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

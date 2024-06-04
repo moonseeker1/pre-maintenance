@@ -3,8 +3,8 @@ package com.system.admin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
 
+@SpringBootApplication(scanBasePackages = {"com.system.admin", "com.system.common", "com.system.security"})
 public class AdminApplication {
 
     public static void main(String[] args) {

@@ -13,9 +13,11 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @since 2024-06-04
  */
 public interface IAdminService extends IService<Admin> {
-    public void insertAdmin(Admin admin);
 
-    Admin login(Admin admin);
+
+    String login(Admin admin);
 
     UserDetails loadUserByUsername(String username);
+
+    boolean register(Admin admin);
 }

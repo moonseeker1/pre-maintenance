@@ -1,6 +1,7 @@
 package com.system.admin.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -33,15 +34,17 @@ public class Resource implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private Integer categoryId;
-
+    @TableField("creat_time")
     private LocalDateTime creatTime;
 
+    @TableField("update_time")
     private LocalDateTime updateTime;
 
-    private String url;
-
+    @TableField("name")
     private String name;
+
+    @TableField("url")
+    private String url;
 
 
 }
