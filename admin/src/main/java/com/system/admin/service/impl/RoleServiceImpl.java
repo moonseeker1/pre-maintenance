@@ -17,4 +17,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
 
+    @Override
+    public void insertRole(Role role) {
+        baseMapper.insert(role);
+    }
 }
