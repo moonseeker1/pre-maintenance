@@ -21,7 +21,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.example</groupId>
+            <groupId>com.system</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

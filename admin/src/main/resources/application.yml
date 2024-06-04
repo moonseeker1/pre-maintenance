@@ -1,6 +1,8 @@
+server:
+  port: 8080
 spring:
   application:
-    name: mall-admin
+    name: admin
   profiles:
     active: dev #???????
   servlet:
@@ -13,6 +15,8 @@ spring:
 
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 jwt:
   tokenHeader: Authorization #JWT??????
   secret: mall-admin-secret #JWT????????
@@ -21,6 +25,7 @@ jwt:
 secure:
   ignored:
     urls: #???????
+      - /**
       - /swagger-ui/
       - /swagger-resources/**
       - /**/v2/api-docs
