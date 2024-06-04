@@ -61,7 +61,6 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>1.2.15</version>
         </dependency>
-
         <!--Mybatis-Plus依赖-->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -137,6 +136,7 @@
                 <scope>import</scope>
             </dependency>
         </dependencies>
+
     </dependencyManagement>
 
 

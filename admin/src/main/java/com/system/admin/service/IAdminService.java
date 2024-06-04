@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-06-04
  */
 public interface IAdminService extends IService<Admin> {
-
+    public void insertAdmin(Admin admin);
 }

@@ -4,6 +4,7 @@ import com.system.admin.service.IAdminService;
 import com.system.admin.model.Admin;
 import com.system.admin.mapper.AdminMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
-
+    @Autowired
+    private AdminMapper adminMapper;
+    @Override
+    public void insertAdmin(Admin admin) {
+        adminMapper.insert(admin);
+    }
 }

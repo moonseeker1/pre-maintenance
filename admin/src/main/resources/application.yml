@@ -12,10 +12,7 @@ spring:
       matching-strategy: ant_path_matcher
 
 mybatis:
-  mapper-locations:
-  - classpath:dao/*.xml
-  - classpath*:com/**/mapper/*.xml
-
+  mapper-locations: classpath:/mapper/**/*.xml
 jwt:
   tokenHeader: Authorization #JWT??????
   secret: mall-admin-secret #JWT????????
