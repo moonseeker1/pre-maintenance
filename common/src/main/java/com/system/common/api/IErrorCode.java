@@ -1,4 +1,4 @@
-package com.system.security.common.api;
+package com.system.common.api;
 
 /**
  * API返回码接口

@@ -1,4 +1,4 @@
-package com.system.security.common.api;
+package com.system.common.api;
 
 /**
  * 通用返回结果封装类

@@ -1,4 +1,4 @@
-package com.system.security.common.api;
+package com.system.common.api;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Page;
