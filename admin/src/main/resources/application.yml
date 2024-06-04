@@ -21,15 +21,6 @@ jwt:
   secret: mall-admin-secret #JWT????????
   expiration: 604800 #JWT??????(60*60*24*7)
   tokenHead: 'Bearer '  #JWT???????
-
-redis:
-  database: mall
-  key:
-    admin: 'ums:admin'
-    resourceList: 'ums:resourceList'
-  expire:
-    common: 86400 # 24??
-
 secure:
   ignored:
     urls: #???????
