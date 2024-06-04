@@ -28,7 +28,7 @@ minio:
 logging:
   level:
     root: info
-    com.system.admin: debug
+    com.system.repair_person: debug
 
 logstash:
   host: localhost
