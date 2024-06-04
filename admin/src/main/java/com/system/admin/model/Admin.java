@@ -1,4 +1,4 @@
-package com.system.security.admin.model;
+package com.system.admin.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

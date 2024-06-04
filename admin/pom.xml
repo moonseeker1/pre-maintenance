@@ -59,7 +59,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.system.security.admin.AdminApplication</mainClass>
+                    <mainClass>com.system.admin.AdminApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>

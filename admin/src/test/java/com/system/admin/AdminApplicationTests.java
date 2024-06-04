@@ -1,4 +1,4 @@
-package com.system.security.admin;
+package com.system.admin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

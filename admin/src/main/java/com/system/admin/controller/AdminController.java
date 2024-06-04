@@ -1,4 +1,4 @@
-package com.system.security.admin.controller;
+package com.system.admin.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;

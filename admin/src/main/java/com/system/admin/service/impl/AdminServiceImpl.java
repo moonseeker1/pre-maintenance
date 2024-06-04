@@ -1,8 +1,8 @@
-package com.system.security.admin.service.impl;
+package com.system.admin.service.impl;
 
-import com.system.security.admin.model.Admin;
-import com.system.security.admin.mapper.AdminMapper;
-import com.system.security.admin.service.IAdminService;
+import com.system.admin.service.IAdminService;
+import com.system.admin.model.Admin;
+import com.system.admin.mapper.AdminMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

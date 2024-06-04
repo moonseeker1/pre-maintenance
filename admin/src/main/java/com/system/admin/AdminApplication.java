@@ -1,4 +1,4 @@
-package com.system.security.admin;
+package com.system.admin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

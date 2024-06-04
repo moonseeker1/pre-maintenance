@@ -1,6 +1,6 @@
-package com.system.security.admin.mapper;
+package com.system.admin.mapper;
 
-import com.system.security.admin.model.Admin;
+import com.system.admin.model.Admin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

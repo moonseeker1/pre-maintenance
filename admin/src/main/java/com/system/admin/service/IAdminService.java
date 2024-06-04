@@ -1,6 +1,6 @@
-package com.system.security.admin.service;
+package com.system.admin.service;
 
-import com.system.security.admin.model.Admin;
+import com.system.admin.model.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
