@@ -39,6 +39,8 @@ public class Resource implements Serializable {
 
     private LocalDateTime updateTime;
 
+    private String url;
+
     private String name;
 
 

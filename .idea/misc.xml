@@ -17,6 +17,7 @@
         <option value="$PROJECT_DIR$/system-admin/pom.xml" />
         <option value="$PROJECT_DIR$/demo/pom.xml" />
         <option value="$PROJECT_DIR$/repair_person/pom.xml" />
+        <option value="$PROJECT_DIR$/security/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

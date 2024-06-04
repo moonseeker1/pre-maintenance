@@ -3,6 +3,8 @@ package com.system.admin.service;
 import com.system.admin.model.Resource;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IResourceService extends IService<Resource> {
     public void insertResource(Resource resource);
+
+    List<Resource> listAll();
 }
