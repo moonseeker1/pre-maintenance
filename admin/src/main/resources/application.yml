@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: mall-admin
+  profiles:
+    active: dev #???????
+  servlet:
+multipart:
+enabled: true #??????
+max-file-size: 10MB #?????????10M
+mvc:
+pathmatch:
+matching-strategy: ant_path_matcher
+
+mybatis:
+mapper-locations:
+- classpath:dao/*.xml
+- classpath*:com/**/mapper/*.xml
+
+jwt:
+tokenHeader: Authorization #JWT??????
+secret: mall-admin-secret #JWT????????
+expiration: 604800 #JWT??????(60*60*24*7)
+tokenHead: 'Bearer '  #JWT???????
+
+redis:
+database: mall
+key:
+admin: 'ums:admin'
+resourceList: 'ums:resourceList'
+expire:
+common: 86400 # 24??
+
+secure:
+ignored:
+urls: #???????
+- /swagger-ui/
+- /swagger-resources/**
+- /**/v2/api-docs
+- /**/*.html
+- /**/*.js
+- /**/*.css
+- /**/*.png
+- /**/*.map
+- /favicon.ico
+- /actuator/**
+- /druid/**
+- /admin/login
+- /admin/register
+- /admin/info
+- /admin/logout
+- /minio/upload
+
