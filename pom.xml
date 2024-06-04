@@ -5,8 +5,15 @@
     <groupId>nwpu</groupId>
     <artifactId>system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>system</name>
     <description>system</description>
+    <modules>
+        <module>admin</module>
+        <module>common</module>
+        <module>security</module>
+        <module>security</module>
+    </modules>
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
