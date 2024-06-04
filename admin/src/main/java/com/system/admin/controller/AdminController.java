@@ -1,13 +1,7 @@
 package com.system.admin.controller;
 
 
-import com.system.admin.model.Admin;
-import com.system.admin.service.impl.AdminServiceImpl;
-import com.system.common.api.CommonResult;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 /**
@@ -23,22 +17,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin")
 //
 public class AdminController {
-    @Autowired
-    AdminServiceImpl adminService;
-    @PostMapping("/register")
-    public CommonResult register(@RequestBody Admin admin) {
-        log.info("register");
-        adminService.insertAdmin(admin);
-        return CommonResult.success("register success");
-    }
-    @PostMapping("/login")
-    public CommonResult login(@RequestBody Admin admin){
-        log.info("login");
-        Admin admin1 = adminService.login(admin);
-        if(admin1 != null){
-            return CommonResult.success("login success");
-        }else{
-            return CommonResult.failed("login failed");
-        }
-    }
+
 }
