@@ -5,6 +5,7 @@ import com.system.admin.model.Admin;
 import com.system.admin.mapper.AdminMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,5 +23,15 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public void insertAdmin(Admin admin) {
         adminMapper.insert(admin);
+    }
+
+    @Override
+    public Admin login(Admin admin) {
+
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        return null;
     }
 }

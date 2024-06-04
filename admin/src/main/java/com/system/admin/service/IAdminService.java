@@ -2,6 +2,7 @@ package com.system.admin.service;
 
 import com.system.admin.model.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * <p>
@@ -13,4 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IAdminService extends IService<Admin> {
     public void insertAdmin(Admin admin);
+
+    Admin login(Admin admin);
+
+    UserDetails loadUserByUsername(String username);
 }

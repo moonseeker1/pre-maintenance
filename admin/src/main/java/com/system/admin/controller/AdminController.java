@@ -31,4 +31,14 @@ public class AdminController {
         adminService.insertAdmin(admin);
         return CommonResult.success("register success");
     }
+    @PostMapping("/login")
+    public CommonResult login(@RequestBody Admin admin){
+        log.info("login");
+        Admin admin1 = adminService.login(admin);
+        if(admin1 != null){
+            return CommonResult.success("login success");
+        }else{
+            return CommonResult.failed("login failed");
+        }
+    }
 }
