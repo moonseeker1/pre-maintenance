@@ -16,9 +16,6 @@
         <module name="common" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="17">
-      <module name="demo" target="1.8" />
-      <module name="system-admin" target="1.8" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8" />
   </component>
 </project>

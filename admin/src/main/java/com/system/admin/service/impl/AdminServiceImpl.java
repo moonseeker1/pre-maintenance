@@ -63,6 +63,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
+            System.out.println(1);
         } catch (AuthenticationException e) {
             log.info("登录异常:{}", e.getMessage());
         }

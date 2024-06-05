@@ -15,13 +15,12 @@ mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
 jwt:
   tokenHeader: Authorization #JWT??????
-  secret: admin-secret #JWT????????
+  secret: mall-admin-secret #JWT????????
   expiration: 604800 #JWT??????(60*60*24*7)
   tokenHead: 'Bearer '  #JWT???????
 secure:
   ignored:
     urls: #???????
-      - /admin/register
       - /swagger-ui/
       - /swagger-resources/**
       - /**/v2/api-docs
