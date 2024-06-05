@@ -138,7 +138,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             return false;
         }
         QueryWrapper<AdminRoleRelation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("role_id",adminId);
+        queryWrapper.eq("admin_id",adminId);
         adminRoleRelationMapper.delete(queryWrapper);
         for(Integer roleId :roleIds){
             AdminRoleRelation adminRoleRelation = new AdminRoleRelation();

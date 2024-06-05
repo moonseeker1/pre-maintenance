@@ -62,7 +62,7 @@ public class AdminController {
     }
 
     @ApiOperation("给用户分配角色")
-    @RequestMapping(value = "/role/update", method = RequestMethod.POST)
+    @PostMapping("/role/update")
     @ResponseBody
     public CommonResult updateRole(@RequestParam("adminId") Integer adminId,
                                    @RequestParam("roleIds") List<Integer> roleIds) {
