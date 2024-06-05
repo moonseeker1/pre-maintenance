@@ -2,7 +2,10 @@ package com.system.admin.service;
 
 import com.system.admin.model.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.system.admin.model.Role;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,4 +23,8 @@ public interface IAdminService extends IService<Admin> {
     UserDetails loadUserByUsername(String username);
 
     boolean register(Admin admin);
+
+    boolean updateRole(Integer adminId, List<Integer> roleIds);
+
+    List<Role> getRoleList();
 }

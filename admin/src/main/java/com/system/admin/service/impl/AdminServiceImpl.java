@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.system.admin.bo.AdminUserDetails;
 import com.system.admin.mapper.AdminMapper;
 import com.system.admin.mapper.AdminRoleRelationMapper;
-import com.system.admin.model.Admin;
-import com.system.admin.model.Resource;
+import com.system.admin.mapper.RoleMapper;
+import com.system.admin.model.*;
 import com.system.admin.service.IAdminService;
 import com.system.common.exception.Asserts;
 import com.system.security.util.JwtTokenUtil;
@@ -35,6 +35,8 @@ import java.util.List;
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
     @Autowired
     private AdminMapper adminMapper;
+    @Autowired
+    private RoleMapper  roleMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -128,5 +130,27 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         admin.setPasswd(encodePassword);
         adminMapper.insert(admin);
         return true;
+    }
+
+    @Override
+    public boolean updateRole(Integer adminId, List<Integer> roleIds) {
+        if(roleIds==null){
+            return false;
+        }
+        QueryWrapper<AdminRoleRelation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("role_id",adminId);
+        adminRoleRelationMapper.delete(queryWrapper);
+        for(Integer roleId :roleIds){
+            AdminRoleRelation adminRoleRelation = new AdminRoleRelation();
+            adminRoleRelation.setAdminId(adminId);
+            adminRoleRelation.setRoleId(roleId);
+            adminRoleRelationMapper.insert(adminRoleRelation);
+        }
+        return true;
+    }
+
+    @Override
+    public List<Role> getRoleList() {
+        return adminMapper.getRoleList();
     }
 }

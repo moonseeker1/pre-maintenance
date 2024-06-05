@@ -2,14 +2,17 @@ package com.system.admin.controller;
 
 
 import com.system.admin.model.Admin;
+import com.system.admin.model.Role;
 import com.system.admin.service.impl.AdminServiceImpl;
 import com.system.common.api.CommonResult;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +43,7 @@ public class AdminController {
         if(is){
             return CommonResult.success("register success");
         }else{
-            return CommonResult.failed("register failed");
+            return CommonResult.failed();
         }
     }
     //登录
@@ -56,5 +59,25 @@ public class AdminController {
         }else{
             return CommonResult.failed("login failed");
         }
+    }
+
+    @ApiOperation("给用户分配角色")
+    @RequestMapping(value = "/role/update", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateRole(@RequestParam("adminId") Integer adminId,
+                                   @RequestParam("roleIds") List<Integer> roleIds) {
+        boolean flag = adminService.updateRole(adminId, roleIds);
+        if (flag) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("获取指定用户的角色")
+    @RequestMapping(value = "/role/{adminId}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<Role>> getRoleList(@PathVariable Long adminId) {
+        List<Role> roleList = adminService.getRoleList();
+        return CommonResult.success(roleList);
     }
 }
