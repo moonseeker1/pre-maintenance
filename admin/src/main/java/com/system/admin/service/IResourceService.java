@@ -1,7 +1,7 @@
 package com.system.admin.service;
 
-import com.system.admin.model.Resource;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.system.admin.model.Resource;
 
 /**
  * <p>
