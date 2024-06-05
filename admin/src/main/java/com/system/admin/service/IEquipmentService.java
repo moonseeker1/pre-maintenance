@@ -1,6 +1,6 @@
 package com.system.admin.service;
 
-import com.system.admin.model.Producer;
+import com.system.admin.model.Equipment;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author yuyu
  * @since 2024-06-04
  */
-public interface IProducerService extends IService<Producer> {
+public interface IEquipmentService extends IService<Equipment> {
 
 }

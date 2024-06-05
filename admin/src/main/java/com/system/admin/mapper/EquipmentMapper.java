@@ -1,6 +1,6 @@
 package com.system.admin.mapper;
 
-import com.system.admin.model.Producer;
+import com.system.admin.model.Equipment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-06-04
  */
 @Mapper
-public interface ProducerMapper extends BaseMapper<Producer> {
+public interface EquipmentMapper extends BaseMapper<Equipment> {
 
 }

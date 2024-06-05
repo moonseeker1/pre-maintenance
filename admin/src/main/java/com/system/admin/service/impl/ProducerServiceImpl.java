@@ -1,4 +1,4 @@
-package com.system.admin.service.impl;
+package com.system.admin.service.Impl;
 
 import com.system.admin.model.Producer;
 import com.system.admin.mapper.ProducerMapper;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  *  服务实现类
  * </p>
  *
- * @author wugou
+ * @author yuyu
  * @since 2024-06-04
  */
 @Service
