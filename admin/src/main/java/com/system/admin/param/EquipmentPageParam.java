@@ -15,7 +15,7 @@ public class EquipmentPageParam {
 
     private Integer serviceLife;
 
-    private Integer pageSize;
+    private Integer pageSize=5;
 
-    private Integer pageNum;
+    private Integer pageNum=1;
 }

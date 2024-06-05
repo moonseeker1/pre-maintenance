@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.admin.model.EquipmentType;
 import com.system.admin.param.AddEquipmentTypeParam;
+import com.system.admin.param.EquipmentTypePageParam;
 import com.system.admin.param.ModifyEquipmentTypeParam;
 import com.system.admin.service.IEquipmentTypeService;
 import com.system.admin.vo.EquipmentTypePageVO;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2024-06-04
  */
 @RestController
-@RequestMapping("system/equipmentType")
+@RequestMapping("/system/equipmentType")
 public class EquipmentTypeController {
 
     @Autowired
@@ -38,24 +39,27 @@ public class EquipmentTypeController {
         EquipmentType equipmentType = new EquipmentType();
         equipmentType.setProducerId(param.getProducerId()).getProducerId();
         equipmentType.setName(param.getName());
-        equipmentTypeService.save(equipmentType);
-        return CommonResult.success(null);
+        boolean flag = equipmentTypeService.save(equipmentType);
+        if (flag) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 
     @DeleteMapping("/{id}")
     public CommonResult deleteById(@PathVariable Integer id){
-        equipmentTypeService.removeById(id);
-        return CommonResult.success(null);
+        boolean flag = equipmentTypeService.removeById(id);
+        if (flag) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 
     @GetMapping("/list")
-    public CommonResult<EquipmentTypePageVO> list(@RequestParam Integer pageSize,@RequestParam Integer pageNum,@RequestParam(required = false) Integer producerId){
-        QueryWrapper<EquipmentType> wrapper=null;
-        if (producerId!=null) {
-            wrapper=new QueryWrapper<EquipmentType>()
-                    .eq("producer_id",producerId);
-        }
-        Page<EquipmentType> page = equipmentTypeService.page(new Page<>(pageNum, pageSize), wrapper);
+    public CommonResult<EquipmentTypePageVO> list(EquipmentTypePageParam param){
+        QueryWrapper<EquipmentType> wrapper=new QueryWrapper<EquipmentType>()
+                .eq(param.getProducerId()!=null,"producer_id",param.getProducerId());
+        Page<EquipmentType> page = equipmentTypeService.page(new Page<>(param.getPageNum(), param.getPageSize()), wrapper);
         EquipmentTypePageVO vo = new EquipmentTypePageVO();
         vo.setTotalNum(page.getTotal());
         vo.setTotalPage(page.getPages());
@@ -70,7 +74,10 @@ public class EquipmentTypeController {
         equipmentType.setCount(param.getCount());
         equipmentType.setName(param.getName());
         equipmentType.setProducerId(param.getProducerId());
-        equipmentTypeService.updateById(equipmentType);
-        return CommonResult.success(null);
+        boolean flag = equipmentTypeService.updateById(equipmentType);
+        if (flag) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 }

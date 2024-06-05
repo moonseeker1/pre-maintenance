@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2024-06-04
  */
 @RestController
-@RequestMapping("system/equipment")
+@RequestMapping("/system/equipment")
 public class EquipmentController {
 
     @Autowired
@@ -33,8 +33,11 @@ public class EquipmentController {
         Equipment equipment = new Equipment();
         equipment.setEquipmentTypeId(param.getEquipmentTypeId());
         equipment.setServiceLife(param.getServiceLife());
-        equipmentService.save(equipment);
-        return CommonResult.success(null);
+        boolean flag = equipmentService.save(equipment);
+        if (flag) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 
     @GetMapping("/{id}")
@@ -67,13 +70,19 @@ public class EquipmentController {
         equipment.setOutput(param.getOutput());
         equipment.setState(param.getState());
         equipment.setServiceLife(param.getServiceLife());
-        equipmentService.updateById(equipment);
-        return CommonResult.success(null);
+        boolean flag = equipmentService.updateById(equipment);
+        if (flag) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 
     @DeleteMapping("/{id}")
     public CommonResult deleteById(@PathVariable Integer id){
-        equipmentService.removeById(id);
-        return CommonResult.success(null);
+        boolean flag = equipmentService.removeById(id);
+        if (flag) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 }
