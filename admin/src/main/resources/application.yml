@@ -32,9 +32,9 @@ secure:
       - /favicon.ico
       - /actuator/**
       - /druid/**
-      - /admin/login
-      - /admin/register
-      - /admin/info
+      - /system/admin/login
+      - /system/admin/register
+      - /system/admin/info
       - /admin/logout
       - /minio/upload
 
