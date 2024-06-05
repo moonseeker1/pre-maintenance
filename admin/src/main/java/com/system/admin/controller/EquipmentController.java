@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-06-04
  */
 @RestController
-@RequestMapping("/system/equipment")
+@RequestMapping("system/equipment")
 public class EquipmentController {
 
     @PostMapping

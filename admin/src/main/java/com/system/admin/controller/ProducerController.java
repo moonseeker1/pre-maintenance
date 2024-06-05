@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2024-06-04
  */
 @RestController
-@RequestMapping("/system/producer")
+@RequestMapping("system/producer")
 @Slf4j
 public class ProducerController {
 
