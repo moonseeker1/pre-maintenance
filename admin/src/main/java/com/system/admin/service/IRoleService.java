@@ -1,7 +1,10 @@
 package com.system.admin.service;
 
-import com.system.admin.model.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.system.admin.model.Resource;
+import com.system.admin.model.Role;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IRoleService extends IService<Role> {
 
+    boolean updateResource(Integer roleId, List<Integer> resourceIds);
+
+
+    List<Resource> listResources(Integer roleId);
 }

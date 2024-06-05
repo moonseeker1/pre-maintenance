@@ -3,6 +3,7 @@ package com.system.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.admin.model.Resource;
 import com.system.admin.model.Role;
 import com.system.admin.param.AddRoleParam;
 import com.system.admin.param.ModifyRoleParam;
@@ -12,6 +13,8 @@ import com.system.admin.vo.RolePageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -76,5 +79,34 @@ public class RoleController {
         vo.setTotalPage(page.getPages());
         vo.setList(page.getRecords());
         return CommonResult.success(vo);
+    }
+
+    /**
+     * 为角色分配资源
+     * @param roleId
+     * @param resourceIds
+     * @return
+     */
+    @PostMapping("/role/resource")
+    public CommonResult setResource(@RequestParam("roleId") Integer roleId,
+                                    @RequestParam("resourceIds") List<Integer> resourceIds){
+        boolean flag = roleService.updateResource(roleId,resourceIds);
+        if (flag) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
+
+    }
+
+    /**
+     * 查询角色资源
+     * @param roleId
+     * @return
+     */
+    @RequestMapping(value = "/resource/{roleId}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<Resource>> getResourceList(@PathVariable Integer roleId) {
+        List<Resource> list = roleService.listResources(roleId);
+        return CommonResult.success(list);
     }
 }

@@ -2,7 +2,6 @@ package com.system.admin.mapper;
 
 import com.system.admin.model.RoleResourceRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -10,9 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author wugou
- * @since 2024-06-04
+ * @since 2024-06-05
  */
-@Mapper
 public interface RoleResourceRelationMapper extends BaseMapper<RoleResourceRelation> {
 
 }
