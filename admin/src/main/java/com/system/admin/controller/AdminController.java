@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("system/admin")
 //
 public class AdminController {
     @Autowired

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-06-04
  */
 @RestController
-@RequestMapping("/resource")
+@RequestMapping("/system/resource")
 public class ResourceController {
 
 }
