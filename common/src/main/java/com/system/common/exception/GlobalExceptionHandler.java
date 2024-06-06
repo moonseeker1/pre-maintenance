@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLSyntaxErrorException;
 
 /**
@@ -55,6 +56,13 @@ public class GlobalExceptionHandler {
         return CommonResult.validateFailed(message);
     }
 
+    @ResponseBody
+    @ExceptionHandler(value = SQLIntegrityConstraintViolationException.class)
+    public CommonResult handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException e){
+        String message;
+        message = "记录已存在或与其他数据绑定，不允许操作！";
+        return CommonResult.failed(message);
+    }
     @ResponseBody
     @ExceptionHandler(value = SQLSyntaxErrorException.class)
     public CommonResult handleSQLSyntaxErrorException(SQLSyntaxErrorException e) {

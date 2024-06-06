@@ -27,7 +27,8 @@ public interface IAdminService extends IService<Admin> {
 
     boolean updateRole(Integer adminId, List<Integer> roleIds);
 
-    List<Role> getRoleList();
+
+    List<Role> getRoleList(Integer adminId);
 
     Boolean modifyById(Integer id, ModifyAdminParam param);
 }

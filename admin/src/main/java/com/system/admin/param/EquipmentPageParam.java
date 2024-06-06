@@ -18,4 +18,10 @@ public class EquipmentPageParam {
     private Integer pageSize=5;
 
     private Integer pageNum=1;
+
+    private Integer typeId;
+
+    private Integer producerId;
+
+
 }

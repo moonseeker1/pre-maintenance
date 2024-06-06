@@ -10,4 +10,6 @@ public class EquipmentPageVO {
     private Long totalNum;
     private Long totalPage;
     private List<Equipment> list;
+    String producerName;
+    String typeName;
 }

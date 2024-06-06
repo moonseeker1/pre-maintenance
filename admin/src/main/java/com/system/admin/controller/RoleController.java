@@ -53,6 +53,7 @@ public class RoleController {
     public CommonResult modifyById(@PathVariable Integer id, @RequestBody ModifyRoleParam param){
         Role role = new Role();
         role.setName(param.getName());
+        role.setId(id);
         boolean flag = roleService.updateById(role);
         if (flag) {
             return CommonResult.success();

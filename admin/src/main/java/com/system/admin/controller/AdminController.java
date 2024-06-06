@@ -78,8 +78,8 @@ public class AdminController {
     @ApiOperation("获取指定用户的角色")
     @RequestMapping(value = "/role/{adminId}", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<Role>> getRoleList(@PathVariable Long adminId) {
-        List<Role> roleList = adminService.getRoleList();
+    public CommonResult<List<Role>> getRoleList(@PathVariable Integer adminId) {
+        List<Role> roleList = adminService.getRoleList(adminId);
         return CommonResult.success(roleList);
     }
 
