@@ -8,6 +8,7 @@ import com.system.admin.model.Role;
 import com.system.admin.param.AddRoleParam;
 import com.system.admin.param.ModifyRoleParam;
 import com.system.admin.param.RolePageParam;
+import com.system.admin.param.SetResourceParam;
 import com.system.admin.service.IRoleService;
 import com.system.admin.vo.RolePageVO;
 import com.system.common.api.CommonResult;
@@ -52,7 +53,6 @@ public class RoleController {
     public CommonResult modifyById(@PathVariable Integer id, @RequestBody ModifyRoleParam param){
         Role role = new Role();
         role.setName(param.getName());
-        role.setAdminCount(param.getAdminCount());
         boolean flag = roleService.updateById(role);
         if (flag) {
             return CommonResult.success();
@@ -83,14 +83,11 @@ public class RoleController {
 
     /**
      * 为角色分配资源
-     * @param roleId
-     * @param resourceIds
      * @return
      */
     @PostMapping("/role/resource")
-    public CommonResult setResource(@RequestParam("roleId") Integer roleId,
-                                    @RequestParam("resourceIds") List<Integer> resourceIds){
-        boolean flag = roleService.updateResource(roleId,resourceIds);
+    public CommonResult setResource(@RequestBody SetResourceParam param){
+        boolean flag = roleService.updateResource(param.getRoleId(),param.getResourceIds());
         if (flag) {
             return CommonResult.success();
         }
@@ -103,7 +100,7 @@ public class RoleController {
      * @param roleId
      * @return
      */
-    @RequestMapping(value = "/resource/{roleId}", method = RequestMethod.GET)
+    @GetMapping( "/resource/{roleId}")
     @ResponseBody
     public CommonResult<List<Resource>> getResourceList(@PathVariable Integer roleId) {
         List<Resource> list = roleService.listResources(roleId);

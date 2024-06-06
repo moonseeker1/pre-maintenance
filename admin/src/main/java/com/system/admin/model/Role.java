@@ -38,10 +38,6 @@ public class Role implements Serializable {
     @TableField("name")
     private String name;
 
-    @ApiModelProperty(value = "角色下的管理员数量")
-    @TableField("admin_count")
-    private Integer adminCount;
-
     @TableField("create_time")
     private LocalDateTime createTime;
 

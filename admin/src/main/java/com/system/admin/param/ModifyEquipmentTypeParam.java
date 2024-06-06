@@ -8,5 +8,4 @@ public class ModifyEquipmentTypeParam {
     private Integer producerId;
 
     private String name;
-    private Integer count;
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-06-06
  */
 @RestController
-@RequestMapping("/repair-order")
+@RequestMapping("/system/repairOrder")
 public class RepairOrderController {
 
 }

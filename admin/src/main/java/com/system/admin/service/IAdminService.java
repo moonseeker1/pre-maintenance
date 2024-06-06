@@ -3,6 +3,7 @@ package com.system.admin.service;
 import com.system.admin.model.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.system.admin.model.Role;
+import com.system.admin.param.ModifyAdminParam;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface IAdminService extends IService<Admin> {
     boolean updateRole(Integer adminId, List<Integer> roleIds);
 
     List<Role> getRoleList();
+
+    Boolean modifyById(Integer id, ModifyAdminParam param);
 }

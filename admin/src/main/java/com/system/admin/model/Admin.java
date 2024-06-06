@@ -46,7 +46,7 @@ public class Admin implements Serializable {
     @TableField("nickname")
     private String nickname;
 
-    @ApiModelProperty(value = "管理员昵称")
+    @ApiModelProperty(value = "管理员邮箱")
     @TableField("email")
     private String email;
 
@@ -56,8 +56,6 @@ public class Admin implements Serializable {
     @TableField("update_time")
     private LocalDateTime updateTime;
 
-    @TableField("state")
-    private Integer state;
 
 
 }

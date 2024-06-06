@@ -69,7 +69,7 @@ public class ResourceController {
         return CommonResult.failed();
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public CommonResult<ResourcePageVO> list(ResourcePageParam param){
         QueryWrapper<Resource> wrapper = new QueryWrapper<Resource>()
                 .like(param.getName() != null, "name", param.getName())

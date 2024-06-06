@@ -13,6 +13,7 @@ import com.system.admin.service.IEquipmentTypeService;
 import com.system.admin.vo.EquipmentPageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -34,6 +35,7 @@ public class EquipmentController {
     private IEquipmentTypeService equipmentTypeService;
 
     @PostMapping
+    @Transactional
     public CommonResult insert(@RequestBody AddEquipmentParam param){
 
         EquipmentType type = equipmentTypeService.getById(param.getEquipmentTypeId());
@@ -45,6 +47,9 @@ public class EquipmentController {
         equipment.setServiceLife(param.getServiceLife());
         boolean flag = equipmentService.save(equipment);
         if (flag) {
+            EquipmentType equipmentType = equipmentTypeService.getById(param.getEquipmentTypeId());
+            equipmentType.setCount(equipmentType.getCount()+1);
+            equipmentTypeService.updateById(equipmentType);
             return CommonResult.success();
         }
         return CommonResult.failed();
@@ -80,6 +85,7 @@ public class EquipmentController {
         equipment.setOutput(param.getOutput());
         equipment.setState(param.getState());
         equipment.setServiceLife(param.getServiceLife());
+        equipment.setEquipmentTypeId(param.getEquipmentTypeId());
         boolean flag = equipmentService.updateById(equipment);
         if (flag) {
             return CommonResult.success();
@@ -88,9 +94,14 @@ public class EquipmentController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public CommonResult deleteById(@PathVariable Integer id){
+        Integer equipmentTypeId = equipmentService.getById(id).getEquipmentTypeId();
         boolean flag = equipmentService.removeById(id);
         if (flag) {
+            EquipmentType equipmentType = equipmentTypeService.getById(equipmentTypeId);
+            equipmentType.setCount(equipmentType.getCount()-1);
+            equipmentTypeService.updateById(equipmentType);
             return CommonResult.success();
         }
         return CommonResult.failed();

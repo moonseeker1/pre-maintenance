@@ -3,6 +3,8 @@ package com.system.admin.controller;
 
 import com.system.admin.model.Admin;
 import com.system.admin.model.Role;
+import com.system.admin.param.ModifyAdminParam;
+import com.system.admin.param.UpdateRoleParam;
 import com.system.admin.service.impl.AdminServiceImpl;
 import com.system.common.api.CommonResult;
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +36,7 @@ public class AdminController {
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+
     //注册
     @PostMapping("/register")
     @ResponseBody
@@ -41,7 +44,7 @@ public class AdminController {
         log.info("register");
         boolean is = adminService.register(admin);
         if(is){
-            return CommonResult.success("register success");
+            return CommonResult.success();
         }else{
             return CommonResult.failed();
         }
@@ -64,9 +67,8 @@ public class AdminController {
     @ApiOperation("给用户分配角色")
     @PostMapping("/role/update")
     @ResponseBody
-    public CommonResult updateRole(@RequestParam("adminId") Integer adminId,
-                                   @RequestParam("roleIds") List<Integer> roleIds) {
-        boolean flag = adminService.updateRole(adminId, roleIds);
+    public CommonResult updateRole(@RequestBody UpdateRoleParam param) {
+        boolean flag = adminService.updateRole(param.getAdminId(), param.getRoleIds());
         if (flag) {
             return CommonResult.success();
         }
@@ -79,5 +81,23 @@ public class AdminController {
     public CommonResult<List<Role>> getRoleList(@PathVariable Long adminId) {
         List<Role> roleList = adminService.getRoleList();
         return CommonResult.success(roleList);
+    }
+
+    @PutMapping("/{id}")
+    public CommonResult modifyById(@PathVariable Integer id, @RequestBody ModifyAdminParam param){
+        Boolean flag=adminService.modifyById(id,param);
+        if(flag){
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
+    }
+
+    @DeleteMapping("/{id}")
+    public CommonResult deleteById(@PathVariable Integer id){
+        Boolean flag=adminService.removeById(id);
+        if(flag){
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 }

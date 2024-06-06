@@ -10,6 +10,4 @@ public class RolePageParam {
     private Integer pageNum=1;
 
     private String name;
-
-    private Integer adminCount;
 }

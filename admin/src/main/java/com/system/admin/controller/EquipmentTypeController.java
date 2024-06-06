@@ -84,7 +84,6 @@ public class EquipmentTypeController {
     public CommonResult modifyById(@PathVariable Integer id, @RequestBody ModifyEquipmentTypeParam param){
         EquipmentType equipmentType = new EquipmentType();
         equipmentType.setId(id);
-        equipmentType.setCount(param.getCount());
         equipmentType.setName(param.getName());
         equipmentType.setProducerId(param.getProducerId());
         boolean flag = equipmentTypeService.updateById(equipmentType);

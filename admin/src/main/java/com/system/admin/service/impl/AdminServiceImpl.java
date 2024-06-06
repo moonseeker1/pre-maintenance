@@ -6,7 +6,11 @@ import com.system.admin.bo.AdminUserDetails;
 import com.system.admin.mapper.AdminMapper;
 import com.system.admin.mapper.AdminRoleRelationMapper;
 import com.system.admin.mapper.RoleMapper;
-import com.system.admin.model.*;
+import com.system.admin.model.Admin;
+import com.system.admin.model.AdminRoleRelation;
+import com.system.admin.model.Resource;
+import com.system.admin.model.Role;
+import com.system.admin.param.ModifyAdminParam;
 import com.system.admin.service.IAdminService;
 import com.system.common.exception.Asserts;
 import com.system.security.util.JwtTokenUtil;
@@ -152,5 +156,19 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public List<Role> getRoleList() {
         return adminMapper.getRoleList();
+    }
+
+    @Override
+    public Boolean modifyById(Integer id, ModifyAdminParam param) {
+        Admin admin=new Admin();
+        admin.setId(id);
+        admin.setUsername(param.getUsername());
+        String password= param.getPasswd();
+        password=passwordEncoder.encode(password);
+        admin.setPasswd(password);
+        admin.setEmail(param.getEmail());
+        admin.setNickname(param.getNickname());
+        int rows =adminMapper.updateById(admin);
+        return rows > 0;
     }
 }
