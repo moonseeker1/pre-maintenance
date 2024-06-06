@@ -10,7 +10,8 @@ import com.system.admin.service.IRepairOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -33,14 +34,13 @@ public class RepairOrderServiceImpl extends ServiceImpl<RepairOrderMapper, Repai
         RepairOrder repairOrder = new RepairOrder();
         repairOrder.setPersonId(addRepairOrderParam.getRepairPersonId());
         repairOrderMapper.insert(repairOrder);
-        List<Integer> equipmentIds = addRepairOrderParam.getEquipmentIds();
-        List<Integer> faultIds = addRepairOrderParam.getFaultIds();
+        HashMap<Integer,Integer> map = addRepairOrderParam.getMap();
         Integer orderId = repairOrder.getId();
-        for(int i=0;i<equipmentIds.size();i++){
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
             OrderEquipmentFaultRelation orderEquipmentFaultRelation = new OrderEquipmentFaultRelation();
+            orderEquipmentFaultRelation.setEquipmentId(entry.getKey());
+            orderEquipmentFaultRelation.setFaultId(entry.getValue());
             orderEquipmentFaultRelation.setOrderId(orderId);
-            orderEquipmentFaultRelation.setEquipmentId(equipmentIds.get(i));
-            orderEquipmentFaultRelation.setFaultId(faultIds.get(i));
             orderEquipmentFaultRelationMapper.insert(orderEquipmentFaultRelation);
         }
         return true;

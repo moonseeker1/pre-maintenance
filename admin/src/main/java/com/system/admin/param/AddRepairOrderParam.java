@@ -2,12 +2,11 @@ package com.system.admin.param;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.HashMap;
 
 @Data
 public class AddRepairOrderParam {
-    List<Integer> equipmentIds;
-    List<Integer> faultIds;
+    HashMap<Integer,Integer> map;
     Integer repairPersonId;
 
 }
