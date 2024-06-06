@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.admin.model.Equipment;
 import com.system.admin.model.EquipmentType;
+import com.system.admin.model.Producer;
 import com.system.admin.param.AddEquipmentTypeParam;
 import com.system.admin.param.EquipmentTypePageParam;
 import com.system.admin.param.ModifyEquipmentTypeParam;
 import com.system.admin.service.IEquipmentService;
 import com.system.admin.service.IEquipmentTypeService;
+import com.system.admin.service.IProducerService;
 import com.system.admin.vo.EquipmentTypePageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class EquipmentTypeController {
 
     @Autowired
     private IEquipmentService equipmentService;
+    @Autowired
+    private IProducerService producerService;
     @GetMapping("/{id}")
     public CommonResult<EquipmentType> getById(@PathVariable Integer id){
         EquipmentType equipmentType = equipmentTypeService.getById(id);
@@ -43,8 +47,11 @@ public class EquipmentTypeController {
     @PostMapping
     public CommonResult insert(@RequestBody AddEquipmentTypeParam param){
         EquipmentType equipmentType = new EquipmentType();
-        equipmentType.setProducerId(param.getProducerId()).getProducerId();
+        Integer producerId = param.getProducerId();
+        Producer producer = producerService.getById(producerId);
+        equipmentType.setProducerId(producerId);
         equipmentType.setName(param.getName());
+        equipmentType.setProducerName(producer.getName());
         boolean flag = equipmentTypeService.save(equipmentType);
         if (flag) {
             return CommonResult.success();
@@ -86,6 +93,7 @@ public class EquipmentTypeController {
         equipmentType.setId(id);
         equipmentType.setName(param.getName());
         equipmentType.setProducerId(param.getProducerId());
+        equipmentType.setProducerName(producerService.getById(param.getProducerId()).getName());
         boolean flag = equipmentTypeService.updateById(equipmentType);
         if (flag) {
             return CommonResult.success();
