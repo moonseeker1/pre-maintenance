@@ -3,15 +3,19 @@ package com.system.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.admin.model.Equipment;
 import com.system.admin.model.EquipmentType;
 import com.system.admin.param.AddEquipmentTypeParam;
 import com.system.admin.param.EquipmentTypePageParam;
 import com.system.admin.param.ModifyEquipmentTypeParam;
+import com.system.admin.service.IEquipmentService;
 import com.system.admin.service.IEquipmentTypeService;
 import com.system.admin.vo.EquipmentTypePageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -28,6 +32,8 @@ public class EquipmentTypeController {
     @Autowired
     private IEquipmentTypeService equipmentTypeService;
 
+    @Autowired
+    private IEquipmentService equipmentService;
     @GetMapping("/{id}")
     public CommonResult<EquipmentType> getById(@PathVariable Integer id){
         EquipmentType equipmentType = equipmentTypeService.getById(id);
@@ -48,6 +54,13 @@ public class EquipmentTypeController {
 
     @DeleteMapping("/{id}")
     public CommonResult deleteById(@PathVariable Integer id){
+
+        QueryWrapper<Equipment> wrapper = new QueryWrapper<Equipment>()
+                .eq("equipment_type_id", id);
+        List<Equipment> equipmentList = equipmentService.list(wrapper);
+        if (equipmentList.size()!=0) {
+            CommonResult.failed("该设备种类id下还存在设备，不能删除");
+        }
         boolean flag = equipmentTypeService.removeById(id);
         if (flag) {
             return CommonResult.success();

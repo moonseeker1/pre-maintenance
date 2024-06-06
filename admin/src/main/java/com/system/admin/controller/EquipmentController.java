@@ -4,10 +4,12 @@ package com.system.admin.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.admin.model.Equipment;
+import com.system.admin.model.EquipmentType;
 import com.system.admin.param.AddEquipmentParam;
 import com.system.admin.param.EquipmentPageParam;
 import com.system.admin.param.ModifyEquipmentParam;
 import com.system.admin.service.IEquipmentService;
+import com.system.admin.service.IEquipmentTypeService;
 import com.system.admin.vo.EquipmentPageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,16 @@ public class EquipmentController {
     @Autowired
     private IEquipmentService equipmentService;
 
+    @Autowired
+    private IEquipmentTypeService equipmentTypeService;
+
     @PostMapping
     public CommonResult insert(@RequestBody AddEquipmentParam param){
+
+        EquipmentType type = equipmentTypeService.getById(param.getEquipmentTypeId());
+        if (type==null) {
+            return CommonResult.failed("不存在输入的设备种类id"+param.getEquipmentTypeId());
+        }
         Equipment equipment = new Equipment();
         equipment.setEquipmentTypeId(param.getEquipmentTypeId());
         equipment.setServiceLife(param.getServiceLife());
