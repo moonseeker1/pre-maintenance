@@ -153,9 +153,10 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         return true;
     }
 
+
     @Override
-    public List<Role> getRoleList() {
-        return adminMapper.getRoleList();
+    public List<Role> getRoleList(Integer adminId){
+        return adminMapper.getRoleList(adminId);
     }
 
     @Override

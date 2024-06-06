@@ -1,8 +1,11 @@
 package com.system.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.system.admin.mapper.EquipmentMapper;
 import com.system.admin.mapper.OrderEquipmentFaultRelationMapper;
 import com.system.admin.mapper.RepairOrderMapper;
+import com.system.admin.model.Equipment;
 import com.system.admin.model.OrderEquipmentFaultRelation;
 import com.system.admin.model.RepairOrder;
 import com.system.admin.param.AddRepairOrderParam;
@@ -28,6 +31,8 @@ public class RepairOrderServiceImpl extends ServiceImpl<RepairOrderMapper, Repai
     RepairOrderMapper repairOrderMapper;
     @Autowired
     private OrderEquipmentFaultRelationMapper orderEquipmentFaultRelationMapper;
+    @Autowired
+    private EquipmentMapper equipmentMapper;
     @Override
     public boolean generateRepairOrder(AddRepairOrderParam addRepairOrderParam) {
         //TODO:没有处理错误情况
@@ -39,6 +44,8 @@ public class RepairOrderServiceImpl extends ServiceImpl<RepairOrderMapper, Repai
         for(Map.Entry<Integer,Integer> entry : map.entrySet()){
             OrderEquipmentFaultRelation orderEquipmentFaultRelation = new OrderEquipmentFaultRelation();
             orderEquipmentFaultRelation.setEquipmentId(entry.getKey());
+            QueryWrapper<Equipment> equipmentQueryWrapper = new QueryWrapper<>();
+            equipmentQueryWrapper.eq("id",entry.getKey());
             orderEquipmentFaultRelation.setFaultId(entry.getValue());
             orderEquipmentFaultRelation.setOrderId(orderId);
             orderEquipmentFaultRelationMapper.insert(orderEquipmentFaultRelation);
