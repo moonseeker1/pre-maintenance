@@ -1,13 +1,14 @@
 package com.system.admin.vo;
 
-import com.system.admin.model.Equipment;
+import com.system.admin.model.Fault;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class EquipmentPageVO {
+public class FaultPageVO {
+
     private Long totalNum;
     private Long totalPage;
-    private List<Equipment> list;
+    private List<Fault> list;
 }
