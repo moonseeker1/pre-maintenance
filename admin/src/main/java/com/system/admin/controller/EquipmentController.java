@@ -44,6 +44,7 @@ public class EquipmentController {
         }
         Equipment equipment = new Equipment();
         equipment.setEquipmentTypeId(param.getEquipmentTypeId());
+        equipment.setEquipmentTypeName(equipmentTypeService.getById(param.getEquipmentTypeId()).getName());
         equipment.setServiceLife(param.getServiceLife());
         boolean flag = equipmentService.save(equipment);
         if (flag) {
@@ -87,6 +88,7 @@ public class EquipmentController {
         equipment.setState(param.getState());
         equipment.setServiceLife(param.getServiceLife());
         equipment.setEquipmentTypeId(param.getEquipmentTypeId());
+        equipment.setEquipmentTypeName(equipmentTypeService.getById(param.getEquipmentTypeId()).getName());
         if (param.getEquipmentTypeId()!=null) {
             Integer originalTypeId = equipmentService.getById(id).getEquipmentTypeId();
             EquipmentType originalType = equipmentTypeService.getById(originalTypeId);
