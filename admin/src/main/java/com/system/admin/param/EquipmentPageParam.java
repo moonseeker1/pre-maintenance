@@ -21,7 +21,8 @@ public class EquipmentPageParam {
 
     private Integer typeId;
 
-    private Integer producerId;
+    private String equipmentTypeName;
+
 
 
 }

@@ -10,5 +10,4 @@ public class FaultPageParam {
     private Integer pageNum=1;
 
     private String name;
-
 }

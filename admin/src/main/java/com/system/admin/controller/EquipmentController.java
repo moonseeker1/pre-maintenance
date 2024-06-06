@@ -69,7 +69,8 @@ public class EquipmentController {
                 .eq(param.getPreserveNum()!=null,"preserve_num",param.getPreserveNum())
                 .gt(param.getOutputMin()!=null,"output",param.getOutputMin())
                 .lt(param.getOutputMax()!=null,"output",param.getOutputMax())
-                .eq(param.getServiceLife()!=null,"service_life",param.getServiceLife());
+                .eq(param.getServiceLife()!=null,"service_life",param.getServiceLife())
+                .like(param.getEquipmentTypeName()!=null,"equipment_type_name",param.getEquipmentTypeName());
         Page<Equipment> page = equipmentService.page(new Page<>(param.getPageNum(), param.getPageSize()), wrapper);
         EquipmentPageVO pageVO = new EquipmentPageVO();
         pageVO.setTotalNum(page.getTotal());
