@@ -13,6 +13,8 @@ import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
  *  前端控制器
@@ -80,5 +82,10 @@ public class ResourceController {
         vo.setTotalPage(page.getPages());
         vo.setList(page.getRecords());
         return CommonResult.success(vo);
+    }
+
+    @GetMapping("/listAll")
+    public CommonResult<List<Resource>> listAll(){
+        return CommonResult.success(resourceService.list());
     }
 }

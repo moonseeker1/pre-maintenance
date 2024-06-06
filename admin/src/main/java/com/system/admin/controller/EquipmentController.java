@@ -78,6 +78,7 @@ public class EquipmentController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public CommonResult modifyById(@PathVariable Integer id, @RequestBody ModifyEquipmentParam param){
         Equipment equipment = new Equipment();
         equipment.setId(id);
@@ -86,6 +87,15 @@ public class EquipmentController {
         equipment.setState(param.getState());
         equipment.setServiceLife(param.getServiceLife());
         equipment.setEquipmentTypeId(param.getEquipmentTypeId());
+        if (param.getEquipmentTypeId()!=null) {
+            Integer originalTypeId = equipmentService.getById(id).getEquipmentTypeId();
+            EquipmentType originalType = equipmentTypeService.getById(originalTypeId);
+            originalType.setCount(originalType.getCount()-1);
+            equipmentTypeService.updateById(originalType);
+            EquipmentType targetType = equipmentTypeService.getById(param.getEquipmentTypeId());
+            targetType.setCount(targetType.getCount()+1);
+            equipmentTypeService.updateById(targetType);
+        }
         boolean flag = equipmentService.updateById(equipment);
         if (flag) {
             return CommonResult.success();

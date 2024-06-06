@@ -93,4 +93,9 @@ public class ProducerController {
         }
         return CommonResult.failed();
     }
+
+    @GetMapping("/listAll")
+    public CommonResult<List<Producer>> listAll(){
+        return CommonResult.success(producerService.list());
+    }
 }

@@ -106,4 +106,10 @@ public class RoleController {
         List<Resource> list = roleService.listResources(roleId);
         return CommonResult.success(list);
     }
+
+    @GetMapping("/listAll")
+    public CommonResult<List<Role>> listAll(){
+        return CommonResult.success(roleService.list());
+    }
+
 }

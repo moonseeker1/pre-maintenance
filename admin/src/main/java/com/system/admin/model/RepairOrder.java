@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * 
  * </p>
  *
- * @author wugou
+ * @author yuyu
  * @since 2024-06-06
  */
 @Data
@@ -34,6 +34,9 @@ public class RepairOrder implements Serializable {
 
     @TableField("person_id")
     private Integer personId;
+
+    @TableField("person_name")
+    private String personName;
 
     @TableField("state")
     private Integer state;

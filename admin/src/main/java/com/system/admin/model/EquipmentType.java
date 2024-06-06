@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author yuyu
- * @since 2024-06-04
+ * @since 2024-06-06
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,6 +34,9 @@ public class EquipmentType implements Serializable {
 
     @TableField("producer_id")
     private Integer producerId;
+
+    @TableField("producer_name")
+    private String producerName;
 
     @TableField("count")
     private Integer count;

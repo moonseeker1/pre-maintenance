@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -24,20 +23,17 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("equipment")
-@ApiModel(value="Equipment对象", description="")
-public class Equipment implements Serializable {
+@TableName("preserve_order")
+@ApiModel(value="PreserveOrder对象", description="")
+public class PreserveOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("equipment_type_id")
-    private Integer equipmentTypeId;
-
-    @TableField("equipment_type_name")
-    private String equipmentTypeName;
+    @TableField("person_id")
+    private Integer personId;
 
     @TableField("create_time")
     private LocalDateTime createTime;
@@ -47,18 +43,6 @@ public class Equipment implements Serializable {
 
     @TableField("state")
     private Integer state;
-
-    @ApiModelProperty(value = "维护次数")
-    @TableField("preserve_num")
-    private Integer preserveNum;
-
-    @ApiModelProperty(value = "产出")
-    @TableField("output")
-    private Integer output;
-
-    @ApiModelProperty(value = "使用年限")
-    @TableField("service_life")
-    private Integer serviceLife;
 
 
 }

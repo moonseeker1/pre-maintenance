@@ -92,4 +92,9 @@ public class EquipmentTypeController {
         }
         return CommonResult.failed();
     }
+
+    @GetMapping("/listAll")
+    public CommonResult<List<EquipmentType>> listAll(){
+        return CommonResult.success(equipmentTypeService.list());
+    }
 }
