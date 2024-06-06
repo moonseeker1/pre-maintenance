@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *  服务类
  * </p>
  *
- * @author wugou
+ * @author yuyu
  * @since 2024-06-06
  */
 public interface IFaultService extends IService<Fault> {

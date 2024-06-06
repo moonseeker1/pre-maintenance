@@ -61,6 +61,6 @@ public class AdminUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return admin.getState().equals(1);
+        return true;
     }
 }
