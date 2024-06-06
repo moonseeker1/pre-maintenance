@@ -1,6 +1,6 @@
 package com.system.repair_person.mapper;
 
-import com.system.repair_person.model.OrderEquipmentRelation;
+import com.system.repair_person.model.OrderEquipmentFaultRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author wugou
  * @since 2024-06-06
  */
-public interface OrderEquipmentRelationMapper extends BaseMapper<OrderEquipmentRelation> {
+public interface OrderEquipmentFaultRelationMapper extends BaseMapper<OrderEquipmentFaultRelation> {
 
 }

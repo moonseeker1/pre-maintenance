@@ -23,17 +23,17 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("order_equipment_relation")
-@ApiModel(value="OrderEquipmentRelation对象", description="")
-public class OrderEquipmentRelation implements Serializable {
+@TableName("order_equipment_fault_relation")
+@ApiModel(value="OrderEquipmentFaultRelation对象", description="")
+public class OrderEquipmentFaultRelation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("item_id")
-    private Integer itemId;
+    @TableField("equipment_id")
+    private Integer equipmentId;
 
     @TableField("order_id")
     private Integer orderId;

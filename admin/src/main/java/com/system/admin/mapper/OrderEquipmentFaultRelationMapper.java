@@ -1,7 +1,7 @@
 package com.system.admin.mapper;
 
-import com.system.admin.model.RoleResourceRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.system.admin.model.OrderEquipmentFaultRelation;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-06-06
  */
 @Mapper
-public interface RoleResourceRelationMapper extends BaseMapper<RoleResourceRelation> {
+public interface OrderEquipmentFaultRelationMapper extends BaseMapper<OrderEquipmentFaultRelation> {
 
 }
