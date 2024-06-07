@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.system.admin.mapper.EquipmentMapper;
 import com.system.admin.mapper.OrderEquipmentFaultRelationMapper;
 import com.system.admin.mapper.RepairOrderMapper;
+import com.system.admin.mapper.RepairPersonMapper;
 import com.system.admin.model.Equipment;
 import com.system.admin.model.OrderEquipmentFaultRelation;
 import com.system.admin.model.RepairOrder;
 import com.system.admin.param.AddRepairOrderParam;
 import com.system.admin.service.IRepairOrderService;
+import com.system.common.exception.Asserts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,19 +35,31 @@ public class RepairOrderServiceImpl extends ServiceImpl<RepairOrderMapper, Repai
     private OrderEquipmentFaultRelationMapper orderEquipmentFaultRelationMapper;
     @Autowired
     private EquipmentMapper equipmentMapper;
+    @Autowired
+    private RepairPersonMapper repairPersonMapper;
     @Override
+    /**
+     * 生成维修单
+     */
     public boolean generateRepairOrder(AddRepairOrderParam addRepairOrderParam) {
         //TODO:没有处理错误情况
         RepairOrder repairOrder = new RepairOrder();
         repairOrder.setPersonId(addRepairOrderParam.getRepairPersonId());
+        repairOrder.setPersonName(repairPersonMapper.selectById(addRepairOrderParam.getRepairPersonId()).getName());
         repairOrderMapper.insert(repairOrder);
         HashMap<Integer,Integer> map = addRepairOrderParam.getMap();
         Integer orderId = repairOrder.getId();
         for(Map.Entry<Integer,Integer> entry : map.entrySet()){
             OrderEquipmentFaultRelation orderEquipmentFaultRelation = new OrderEquipmentFaultRelation();
-            orderEquipmentFaultRelation.setEquipmentId(entry.getKey());
             QueryWrapper<Equipment> equipmentQueryWrapper = new QueryWrapper<>();
             equipmentQueryWrapper.eq("id",entry.getKey());
+            Equipment equipment = equipmentMapper.selectOne(equipmentQueryWrapper);
+            if(equipment.getState()!=0){
+                Asserts.fail("设备状态不是正常状态");
+            }
+            equipment.setState(1);
+            equipmentMapper.updateById(equipment);
+            orderEquipmentFaultRelation.setEquipmentId(entry.getKey());
             orderEquipmentFaultRelation.setFaultId(entry.getValue());
             orderEquipmentFaultRelation.setOrderId(orderId);
             orderEquipmentFaultRelationMapper.insert(orderEquipmentFaultRelation);

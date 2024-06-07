@@ -38,8 +38,8 @@ public class RepairPerson implements Serializable {
     @TableField("passwd")
     private String passwd;
 
-    @TableField("nickname")
-    private String nickname;
+    @TableField("name")
+    private String name;
 
     @TableField("email")
     private String email;
