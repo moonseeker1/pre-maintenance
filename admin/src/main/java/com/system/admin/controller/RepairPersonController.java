@@ -11,6 +11,7 @@ import com.system.admin.service.IRepairPersonService;
 import com.system.admin.vo.RepairPersonPageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -27,6 +28,8 @@ public class RepairPersonController {
 
     @Autowired
     private IRepairPersonService repairPersonService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
     public CommonResult getById(@PathVariable Integer id){
@@ -39,7 +42,8 @@ public class RepairPersonController {
         repairPerson.setId(id);
         repairPerson.setEmail(param.getEmail());
         repairPerson.setUsername(param.getUsername());
-        repairPerson.setPasswd(param.getPasswd());
+        String password = passwordEncoder.encode(param.getPasswd());
+        repairPerson.setPasswd(password);
         repairPerson.setName(param.getName());
         boolean flag = repairPersonService.updateById(repairPerson);
         if (flag) {
@@ -53,7 +57,9 @@ public class RepairPersonController {
         RepairPerson repairPerson = new RepairPerson();
         repairPerson.setEmail(param.getEmail());
         repairPerson.setUsername(param.getUsername());
-        repairPerson.setPasswd(param.getPasswd());
+        String passwd = param.getPasswd();
+        passwd=passwordEncoder.encode(passwd); // encode password
+        repairPerson.setPasswd(passwd);
         repairPerson.setName(param.getName());
         boolean flag = repairPersonService.save(repairPerson);
         if (flag) {
