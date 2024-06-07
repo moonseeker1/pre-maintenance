@@ -24,11 +24,11 @@ public class AutoPreserveTask {
     private IPreserveOrderService preserveOrderService;
     @Autowired
     private PreserveEquipmentRelationMapper preserveEquipmentRelationMapper;
-    @Scheduled(cron = "0 */1 * * * * ?")
+    @Scheduled(cron = "0 */1 * * * ?")
     @Transactional
     public void executeTask(){
         QueryWrapper<Equipment> equipmentQueryWrapper = new QueryWrapper<>();
-        equipmentQueryWrapper.eq("status", 0);
+        equipmentQueryWrapper.eq("state", 0);
         List<Equipment> list = equipmentService.list(equipmentQueryWrapper);
         int count = 0;
         List<Equipment> equipmentList = new ArrayList<>();
@@ -51,7 +51,7 @@ public class AutoPreserveTask {
             Integer preserveCycle = equipment.getPreserveCycle();
             LocalDateTime lastPreserveTime = equipment.getLastPreserveTime();
             LocalDateTime now = LocalDateTime.now();
-            if (now.isAfter(lastPreserveTime.plusDays(preserveCycle))) {
+            if (now.isAfter(lastPreserveTime.plusSeconds(preserveCycle))) {
                 equipmentList.add(equipment);
                 count++;
             }
