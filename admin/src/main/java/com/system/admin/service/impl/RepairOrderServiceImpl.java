@@ -73,6 +73,9 @@ public class RepairOrderServiceImpl extends ServiceImpl<RepairOrderMapper, Repai
     public RepairOrderDetailsVO getRepairOrderDetails(Integer repairOrderId) {
         RepairOrderDetailsVO repairOrderDetailsVO = new RepairOrderDetailsVO();
         RepairOrder repairOrder = repairOrderMapper.selectById(repairOrderId);
+        repairOrderDetailsVO.setPersonName(repairOrder.getPersonName());
+        repairOrderDetailsVO.setRepairOrderId(repairOrder.getId());
+        repairOrderDetailsVO.setState(repairOrder.getState());
         QueryWrapper<OrderEquipmentFaultRelation> wrapper = new QueryWrapper<OrderEquipmentFaultRelation>()
                 .eq("order_id", repairOrderId);
         List<OrderEquipmentFaultRelation> list = orderEquipmentFaultRelationMapper.selectList(wrapper);
