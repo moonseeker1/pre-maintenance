@@ -8,7 +8,7 @@ public class ModifyRepairPersonParam {
 
     private String passwd;
 
-    private String nickname;
+    private String name;
 
     private String email;
 }
