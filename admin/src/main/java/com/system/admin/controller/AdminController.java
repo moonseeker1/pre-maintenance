@@ -1,11 +1,15 @@
 package com.system.admin.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.admin.model.Admin;
 import com.system.admin.model.Role;
+import com.system.admin.param.AdminPageParam;
 import com.system.admin.param.ModifyAdminParam;
 import com.system.admin.param.UpdateRoleParam;
 import com.system.admin.service.impl.AdminServiceImpl;
+import com.system.admin.vo.AdminPageVO;
 import com.system.common.api.CommonResult;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -99,5 +103,18 @@ public class AdminController {
             return CommonResult.success();
         }
         return CommonResult.failed();
+    }
+
+    @GetMapping
+    public CommonResult<AdminPageVO> list(AdminPageParam param){
+        QueryWrapper<Admin> wrapper = new QueryWrapper<Admin>()
+                .like(param.getName() != null, "name", param.getName())
+                .like(param.getEmail() != null, "email", param.getEmail());
+        Page<Admin> page = adminService.page(new Page<>(param.getPageNum(), param.getPageSize()), wrapper);
+        AdminPageVO vo = new AdminPageVO();
+        vo.setTotalNum(page.getTotal());
+        vo.setTotalPage(page.getPages());
+        vo.setList(page.getRecords());
+        return CommonResult.success(vo);
     }
 }

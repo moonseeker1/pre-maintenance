@@ -42,9 +42,8 @@ public class Admin implements Serializable {
     @TableField("passwd")
     private String passwd;
 
-    @ApiModelProperty(value = "管理员nickname")
-    @TableField("nickname")
-    private String nickname;
+    @TableField("name")
+    private String name;
 
     @ApiModelProperty(value = "管理员邮箱")
     @TableField("email")
