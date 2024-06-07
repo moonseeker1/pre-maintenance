@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -46,11 +47,13 @@ public class PreserveOrderController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public CommonResult finish(@PathVariable Integer id){
         PreserveOrder order = preserveOrderService.getById(id);
+        boolean flag1 = preserveOrderService.setEquipment(id);
         order.setState(1);
-        boolean flag = preserveOrderService.updateById(order);
-        if (flag) {
+        boolean flag2 = preserveOrderService.updateById(order);
+        if (flag1&&flag2) {
             return CommonResult.success();
         }
         return CommonResult.failed();

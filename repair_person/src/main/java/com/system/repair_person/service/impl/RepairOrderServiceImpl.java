@@ -3,10 +3,10 @@ package com.system.repair_person.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.system.repair_person.mapper.EquipmentMapper;
-import com.system.repair_person.mapper.PreserveEquipmentRelationMapper;
+import com.system.repair_person.mapper.OrderEquipmentFaultRelationMapper;
 import com.system.repair_person.mapper.RepairOrderMapper;
 import com.system.repair_person.model.Equipment;
-import com.system.repair_person.model.PreserveEquipmentRelation;
+import com.system.repair_person.model.OrderEquipmentFaultRelation;
 import com.system.repair_person.model.RepairOrder;
 import com.system.repair_person.service.IRepairOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +25,16 @@ import java.util.List;
 @Service
 public class RepairOrderServiceImpl extends ServiceImpl<RepairOrderMapper, RepairOrder> implements IRepairOrderService {
     @Autowired
-    PreserveEquipmentRelationMapper preserveEquipmentRelationMapper;
+    OrderEquipmentFaultRelationMapper orderEquipmentFaultRelationMapper;
     @Autowired
     EquipmentMapper equipmentMapper;
     @Override
     public boolean setEquipment(Integer id) {
-        QueryWrapper<PreserveEquipmentRelation> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<OrderEquipmentFaultRelation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("order_id",id);
-        List<PreserveEquipmentRelation> list = preserveEquipmentRelationMapper.selectList(queryWrapper);
-        for (PreserveEquipmentRelation preserveEquipmentRelation : list){
-            Integer equipmentId = preserveEquipmentRelation.getEquipmentId();
+        List<OrderEquipmentFaultRelation> list = orderEquipmentFaultRelationMapper.selectList(queryWrapper);
+        for (OrderEquipmentFaultRelation orderEquipmentFaultRelation : list){
+            Integer equipmentId = orderEquipmentFaultRelation.getEquipmentId();
             Equipment equipment = new Equipment();
             equipment.setState(0);
             equipment.setId(equipmentId);

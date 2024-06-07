@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IPreserveOrderService extends IService<PreserveOrder> {
 
+    boolean setEquipment(Integer id);
 }

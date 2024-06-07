@@ -1,9 +1,9 @@
 package com.system.repair_person.service.impl;
 
-import com.system.repair_person.model.Equipment;
-import com.system.repair_person.mapper.EquipmentMapper;
-import com.system.repair_person.service.IEquipmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.system.repair_person.mapper.EquipmentMapper;
+import com.system.repair_person.model.Equipment;
+import com.system.repair_person.service.IEquipmentService;
 import org.springframework.stereotype.Service;
 
 /**
