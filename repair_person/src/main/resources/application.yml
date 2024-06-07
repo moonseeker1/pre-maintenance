@@ -35,8 +35,7 @@ secure:
       - /favicon.ico
       - /actuator/**
       - /druid/**
-      - /admin/login
+      - /system/admin/login
       - /admin/info
       - /admin/logout
-      - /minio/upload
 

@@ -87,7 +87,7 @@ public class RoleController {
      * 为角色分配资源
      * @return
      */
-    @PostMapping("/role/resource")
+    @PostMapping("/resource")
     public CommonResult setResource(@RequestBody SetResourceParam param){
         boolean flag = roleService.updateResource(param.getRoleId(),param.getResourceIds());
         if (flag) {

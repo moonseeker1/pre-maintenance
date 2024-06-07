@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2024-06-06
  */
 @RestController
-@RequestMapping("/fault")
+@RequestMapping("/system/fault")
 public class FaultController {
 
     @Autowired
