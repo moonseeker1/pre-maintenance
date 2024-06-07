@@ -1,14 +1,16 @@
 package com.system.admin.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.admin.model.RepairOrder;
 import com.system.admin.param.AddRepairOrderParam;
+import com.system.admin.param.RepairOrderPageParam;
 import com.system.admin.service.IRepairOrderService;
+import com.system.admin.vo.RepairOrderPageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -34,4 +36,15 @@ public class RepairOrderController {
 
     }
 
+    @GetMapping
+    public CommonResult<RepairOrderPageVO> list(RepairOrderPageParam param){
+        QueryWrapper<RepairOrder> wrapper = new QueryWrapper<RepairOrder>()
+                .like(param.getPersonName() != null, "person_name", param.getPersonName());
+        Page<RepairOrder> page = repairOrderService.page(new Page<>(param.getPageNum(), param.getPageSize()), wrapper);
+        RepairOrderPageVO vo = new RepairOrderPageVO();
+        vo.setTotalNum(page.getTotal());
+        vo.setTotalPage(page.getPages());
+        vo.setList(page.getRecords());
+        return CommonResult.success(vo);
+    }
 }
