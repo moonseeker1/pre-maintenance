@@ -20,28 +20,25 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("preserve_order")
-public class PreserveOrder implements Serializable {
+@TableName("preserve_equipment_relation")
+public class PreserveEquipmentRelation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("person_id")
-    private Integer personId;
+    @TableField("order_id")
+    private Integer orderId;
 
-    @TableField("person_name")
-    private String personName;
+    @TableField("equipment_id")
+    private Integer equipmentId;
 
     @TableField("create_time")
     private LocalDateTime createTime;
 
     @TableField("update_time")
     private LocalDateTime updateTime;
-
-    @TableField("state")
-    private Integer state;
 
 
 }
