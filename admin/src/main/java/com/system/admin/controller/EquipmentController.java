@@ -45,6 +45,7 @@ public class EquipmentController {
         Equipment equipment = new Equipment();
         equipment.setEquipmentTypeId(param.getEquipmentTypeId());
         equipment.setEquipmentTypeName(equipmentTypeService.getById(param.getEquipmentTypeId()).getName());
+        equipment.setPreserveCycle(param.getPreserveCycle());
         equipment.setServiceLife(param.getServiceLife());
         boolean flag = equipmentService.save(equipment);
         if (flag) {
@@ -84,9 +85,8 @@ public class EquipmentController {
     public CommonResult modifyById(@PathVariable Integer id, @RequestBody ModifyEquipmentParam param){
         Equipment equipment = new Equipment();
         equipment.setId(id);
-        equipment.setPreserveNum(param.getPreserveNum());
+        equipment.setPreserveCycle(param.getPreserveCycle());
         equipment.setOutput(param.getOutput());
-        equipment.setState(param.getState());
         equipment.setServiceLife(param.getServiceLife());
         equipment.setEquipmentTypeId(param.getEquipmentTypeId());
         equipment.setEquipmentTypeName(equipmentTypeService.getById(param.getEquipmentTypeId()).getName());

@@ -6,8 +6,7 @@ import lombok.Data;
 public class ModifyEquipmentParam {
 
     private Integer equipmentTypeId;
-    private Integer state;
-    private Integer preserveNum;
+    private Integer preserveCycle;
     private Integer serviceLife;
     private Integer output;
 }

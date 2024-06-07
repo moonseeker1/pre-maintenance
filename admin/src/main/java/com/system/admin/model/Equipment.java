@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  * 
  * </p>
  *
- * @author yuyu
- * @since 2024-06-06
+ * @author wugou
+ * @since 2024-06-07
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -45,12 +45,15 @@ public class Equipment implements Serializable {
     @TableField("update_time")
     private LocalDateTime updateTime;
 
+    @TableField("last_preserve_time")
+    private LocalDateTime lastPreserveTime;
+
     @TableField("state")
     private Integer state;
 
     @ApiModelProperty(value = "维护次数")
-    @TableField("preserve_num")
-    private Integer preserveNum;
+    @TableField("preserve_cycle")
+    private Integer preserveCycle;
 
     @ApiModelProperty(value = "产出")
     @TableField("output")
