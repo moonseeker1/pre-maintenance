@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 public class RepairOrderController {
     @Autowired
     private IRepairOrderService repairOrderService;
+
 
     @GetMapping("/list")
     public CommonResult<RepairOrderPageVO> list(RepairOrderPageParam param) {
@@ -45,11 +47,13 @@ public class RepairOrderController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public CommonResult finish(@PathVariable Integer id){
         RepairOrder order = repairOrderService.getById(id);
         order.setState(1);
-        boolean flag = repairOrderService.updateById(order);
-        if (flag) {
+        boolean flag1 = repairOrderService.setEquipment(id);
+        boolean flag2 = repairOrderService.updateById(order);
+        if (flag1&&flag2) {
             return CommonResult.success();
         }
         return CommonResult.failed();

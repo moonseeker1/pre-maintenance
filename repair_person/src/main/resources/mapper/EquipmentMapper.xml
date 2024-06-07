@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.repair_person.mapper.EquipmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.system.repair_person.model.Equipment">
+        <id column="id" property="id" />
+        <result column="equipment_type_id" property="equipmentTypeId" />
+        <result column="equipment_type_name" property="equipmentTypeName" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="last_preserve_time" property="lastPreserveTime" />
+        <result column="state" property="state" />
+        <result column="preserve_cycle" property="preserveCycle" />
+        <result column="output" property="output" />
+        <result column="service_life" property="serviceLife" />
+    </resultMap>
+
+</mapper>

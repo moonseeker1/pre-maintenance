@@ -51,7 +51,7 @@ public class AutoPreserveTask {
             Integer preserveCycle = equipment.getPreserveCycle();
             LocalDateTime lastPreserveTime = equipment.getLastPreserveTime();
             LocalDateTime now = LocalDateTime.now();
-            if (now.isAfter(lastPreserveTime.plusSeconds(preserveCycle))) {
+            if (now.isAfter(lastPreserveTime.plusMinutes(preserveCycle))) {
                 equipmentList.add(equipment);
                 count++;
             }

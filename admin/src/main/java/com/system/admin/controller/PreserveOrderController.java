@@ -6,14 +6,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.admin.model.PreserveOrder;
 import com.system.admin.param.PreserveOrderParam;
 import com.system.admin.service.IPreserveOrderService;
+import com.system.admin.service.IRepairPersonService;
 import com.system.admin.vo.PreserveOrderDetailsVO;
 import com.system.admin.vo.PreserveOrderPageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -28,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PreserveOrderController {
     @Autowired
     private IPreserveOrderService preserveOrderService;
+    @Autowired
+    private IRepairPersonService repairPersonService;
     /**
      * 查看订单详情
      */
@@ -48,5 +48,20 @@ public class PreserveOrderController {
         vo.setTotalPage(page.getPages());
         vo.setList(page.getRecords());
         return CommonResult.success(vo);
+    }
+
+    @PutMapping
+    public CommonResult setRepairPerson(@RequestParam Integer repairPersonId,@RequestParam Integer preserveOrderId){
+
+        PreserveOrder preserveOrder = preserveOrderService.getById(preserveOrderId);
+        preserveOrder.setPersonId(repairPersonId);
+        preserveOrder.setPersonName(repairPersonService.getById(repairPersonId).getName());
+        boolean flag = preserveOrderService.updateById(preserveOrder);
+        if(flag){
+            return CommonResult.success();
+        }
+            return CommonResult.failed();
+
+
     }
 }
