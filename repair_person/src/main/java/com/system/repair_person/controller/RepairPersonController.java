@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
  *  前端控制器
  * </p>
  *
- * @author wugou
- * @since 2024-06-06
+ * @author yuyu
+ * @since 2024-06-07
  */
 @RestController
-@RequestMapping("/system/repairPerson")
+@RequestMapping("/system/r/repairPerson")
 public class RepairPersonController {
 
 }

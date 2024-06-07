@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *  服务类
  * </p>
  *
- * @author wugou
- * @since 2024-06-06
+ * @author yuyu
+ * @since 2024-06-07
  */
 public interface IRepairOrderService extends IService<RepairOrder> {
 

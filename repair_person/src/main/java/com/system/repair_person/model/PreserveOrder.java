@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -17,26 +16,25 @@ import java.time.LocalDateTime;
  * 
  * </p>
  *
- * @author wugou
- * @since 2024-06-06
+ * @author yuyu
+ * @since 2024-06-07
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("order_equipment_fault_relation")
-@ApiModel(value="OrderEquipmentFaultRelation对象", description="")
-public class OrderEquipmentFaultRelation implements Serializable {
+@TableName("preserve_order")
+public class PreserveOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("equipment_id")
-    private Integer equipmentId;
+    @TableField("person_id")
+    private Integer personId;
 
-    @TableField("order_id")
-    private Integer orderId;
+    @TableField("person_name")
+    private String personName;
 
     @TableField("create_time")
     private LocalDateTime createTime;
@@ -44,8 +42,8 @@ public class OrderEquipmentFaultRelation implements Serializable {
     @TableField("update_time")
     private LocalDateTime updateTime;
 
-    @TableField("fault_id")
-    private Integer faultId;
+    @TableField("state")
+    private Integer state;
 
 
 }

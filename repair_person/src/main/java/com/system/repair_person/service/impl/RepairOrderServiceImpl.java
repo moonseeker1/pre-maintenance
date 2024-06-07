@@ -1,4 +1,4 @@
-package com.system.repair_person.service.impl;
+package com.system.repair_person.service.Impl;
 
 import com.system.repair_person.model.RepairOrder;
 import com.system.repair_person.mapper.RepairOrderMapper;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
  *  服务实现类
  * </p>
  *
- * @author wugou
- * @since 2024-06-06
+ * @author yuyu
+ * @since 2024-06-07
  */
 @Service
 public class RepairOrderServiceImpl extends ServiceImpl<RepairOrderMapper, RepairOrder> implements IRepairOrderService {

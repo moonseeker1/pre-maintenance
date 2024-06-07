@@ -1,6 +1,6 @@
 package com.system.repair_person.service;
 
-import com.system.repair_person.model.RepairPerson;
+import com.system.repair_person.model.PreserveOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author yuyu
  * @since 2024-06-07
  */
-public interface IRepairPersonService extends IService<RepairPerson> {
+public interface IPreserveOrderService extends IService<PreserveOrder> {
 
 }

@@ -1,6 +1,6 @@
 package com.system.repair_person.mapper;
 
-import com.system.repair_person.model.RepairOrder;
+import com.system.repair_person.model.PreserveOrder;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-06-07
  */
 @Mapper
-public interface RepairOrderMapper extends BaseMapper<RepairOrder> {
+public interface PreserveOrderMapper extends BaseMapper<PreserveOrder> {
 
 }

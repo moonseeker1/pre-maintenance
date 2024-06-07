@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -17,14 +16,13 @@ import java.time.LocalDateTime;
  * 
  * </p>
  *
- * @author wugou
- * @since 2024-06-06
+ * @author yuyu
+ * @since 2024-06-07
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("repair_person")
-@ApiModel(value="RepairPerson对象", description="")
 public class RepairPerson implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,8 +36,8 @@ public class RepairPerson implements Serializable {
     @TableField("passwd")
     private String passwd;
 
-    @TableField("nickname")
-    private String nickname;
+    @TableField("name")
+    private String name;
 
     @TableField("email")
     private String email;
@@ -49,9 +47,6 @@ public class RepairPerson implements Serializable {
 
     @TableField("update_time")
     private LocalDateTime updateTime;
-
-    @TableField("state")
-    private Integer state;
 
 
 }
