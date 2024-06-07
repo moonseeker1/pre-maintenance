@@ -2,6 +2,7 @@ package com.system.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.system.admin.dao.EquipmentAndFaultDao;
 import com.system.admin.mapper.EquipmentMapper;
 import com.system.admin.mapper.OrderEquipmentFaultRelationMapper;
 import com.system.admin.mapper.RepairOrderMapper;
@@ -15,8 +16,7 @@ import com.system.common.exception.Asserts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * <p>
@@ -47,20 +47,20 @@ public class RepairOrderServiceImpl extends ServiceImpl<RepairOrderMapper, Repai
         repairOrder.setPersonId(addRepairOrderParam.getRepairPersonId());
         repairOrder.setPersonName(repairPersonMapper.selectById(addRepairOrderParam.getRepairPersonId()).getName());
         repairOrderMapper.insert(repairOrder);
-        HashMap<Integer,Integer> map = addRepairOrderParam.getMap();
+        List<EquipmentAndFaultDao> list = addRepairOrderParam.getList();
         Integer orderId = repairOrder.getId();
-        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+        for(EquipmentAndFaultDao equipmentAndFaultDao: list){
             OrderEquipmentFaultRelation orderEquipmentFaultRelation = new OrderEquipmentFaultRelation();
             QueryWrapper<Equipment> equipmentQueryWrapper = new QueryWrapper<>();
-            equipmentQueryWrapper.eq("id",entry.getKey());
+            equipmentQueryWrapper.eq("id",equipmentAndFaultDao.getEquipmentId());
             Equipment equipment = equipmentMapper.selectOne(equipmentQueryWrapper);
             if(equipment.getState()!=0){
                 Asserts.fail("设备状态不是正常状态");
             }
             equipment.setState(1);
             equipmentMapper.updateById(equipment);
-            orderEquipmentFaultRelation.setEquipmentId(entry.getKey());
-            orderEquipmentFaultRelation.setFaultId(entry.getValue());
+            orderEquipmentFaultRelation.setEquipmentId(equipmentAndFaultDao.getEquipmentId());
+            orderEquipmentFaultRelation.setFaultId(equipmentAndFaultDao.getFaultId());
             orderEquipmentFaultRelation.setOrderId(orderId);
             orderEquipmentFaultRelationMapper.insert(orderEquipmentFaultRelation);
         }

@@ -1,12 +1,13 @@
 package com.system.admin.param;
 
+import com.system.admin.dao.EquipmentAndFaultDao;
 import lombok.Data;
 
-import java.util.HashMap;
+import java.util.List;
 
 @Data
 public class AddRepairOrderParam {
-    HashMap<Integer,Integer> map;
+    List<EquipmentAndFaultDao> list;
     Integer repairPersonId;
 
 }

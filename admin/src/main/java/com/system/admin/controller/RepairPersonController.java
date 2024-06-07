@@ -40,7 +40,7 @@ public class RepairPersonController {
         repairPerson.setEmail(param.getEmail());
         repairPerson.setUsername(param.getUsername());
         repairPerson.setPasswd(param.getPasswd());
-        repairPerson.setNickname(param.getNickname());
+        repairPerson.setName(param.getNickname());
         boolean flag = repairPersonService.updateById(repairPerson);
         if (flag) {
             return CommonResult.success();
@@ -54,7 +54,7 @@ public class RepairPersonController {
         repairPerson.setEmail(param.getEmail());
         repairPerson.setUsername(param.getUsername());
         repairPerson.setPasswd(param.getPasswd());
-        repairPerson.setNickname(param.getNickname());
+        repairPerson.setName(param.getNickname());
         boolean flag = repairPersonService.save(repairPerson);
         if (flag) {
             return CommonResult.success();
