@@ -7,6 +7,7 @@ import com.system.admin.model.RepairOrder;
 import com.system.admin.param.AddRepairOrderParam;
 import com.system.admin.param.RepairOrderPageParam;
 import com.system.admin.service.IRepairOrderService;
+import com.system.admin.vo.RepairOrderDetailsVO;
 import com.system.admin.vo.RepairOrderPageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,14 @@ public class RepairOrderController {
             return CommonResult.failed();
         }
 
+    }
+    /**
+     * 查看订单详情
+     */
+    @GetMapping("/details/{repairOrderId}")
+    public CommonResult<RepairOrderDetailsVO> getRepairOrderDetails(@PathVariable Integer repairOrderId){
+        RepairOrderDetailsVO repairOrderDetailsVO=repairOrderService.getRepairOrderDetails(repairOrderId);
+        return CommonResult.success(repairOrderDetailsVO);
     }
 
     @GetMapping

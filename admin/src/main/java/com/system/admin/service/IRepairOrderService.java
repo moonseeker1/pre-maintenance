@@ -3,6 +3,7 @@ package com.system.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.system.admin.model.RepairOrder;
 import com.system.admin.param.AddRepairOrderParam;
+import com.system.admin.vo.RepairOrderDetailsVO;
 
 /**
  * <p>
@@ -16,4 +17,5 @@ public interface IRepairOrderService extends IService<RepairOrder> {
 
     boolean generateRepairOrder(AddRepairOrderParam addRepairOrderParam);
 
+    RepairOrderDetailsVO getRepairOrderDetails(Integer repairOrderId);
 }
