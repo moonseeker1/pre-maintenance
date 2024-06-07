@@ -40,7 +40,7 @@ public class RepairPersonController {
         repairPerson.setEmail(param.getEmail());
         repairPerson.setUsername(param.getUsername());
         repairPerson.setPasswd(param.getPasswd());
-        repairPerson.setName(param.getNickname());
+        repairPerson.setName(param.getName());
         boolean flag = repairPersonService.updateById(repairPerson);
         if (flag) {
             return CommonResult.success();
@@ -54,7 +54,7 @@ public class RepairPersonController {
         repairPerson.setEmail(param.getEmail());
         repairPerson.setUsername(param.getUsername());
         repairPerson.setPasswd(param.getPasswd());
-        repairPerson.setName(param.getNickname());
+        repairPerson.setName(param.getName());
         boolean flag = repairPersonService.save(repairPerson);
         if (flag) {
             return CommonResult.success();
@@ -75,7 +75,7 @@ public class RepairPersonController {
     public CommonResult<RepairPersonPageVO> list(RepairPersonPageParam param){
         QueryWrapper<RepairPerson> wrapper = new QueryWrapper<RepairPerson>()
                 .like(param.getEmail() != null, "email", param.getEmail())
-                .like(param.getNickname() != null, "nickname", param.getNickname());
+                .like(param.getName() != null, "nickname", param.getName());
         Page<RepairPerson> page = repairPersonService.page(new Page<>(param.getPageNum(), param.getPageSize()), wrapper);
         RepairPersonPageVO vo = new RepairPersonPageVO();
         vo.setList(page.getRecords());
