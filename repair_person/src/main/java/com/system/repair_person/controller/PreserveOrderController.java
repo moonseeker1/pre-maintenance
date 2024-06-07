@@ -2,9 +2,12 @@ package com.system.repair_person.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.common.api.CommonResult;
+import com.system.repair_person.model.PreserveOrder;
 import com.system.repair_person.model.RepairPerson;
-import com.system.repair_person.service.IRepairPersonService;
+import com.system.repair_person.param.PreserveOrderPageParam;
+import com.system.repair_person.service.IPreserveOrderService;
 import com.system.repair_person.vo.PreserveOrderPageVO;
 import com.system.security.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +29,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class PreserveOrderController {
 
     @Autowired
-    private IRepairPersonService repairPersonService;
+    private IPreserveOrderService preserveOrderService;
 
     @GetMapping("/list")
+    public CommonResult<PreserveOrderPageVO> list(@AuthenticationPrincipal RepairPerson repairPerson
+                                                , PreserveOrderPageParam param) {
 
-
-
-
-
-
-
-
-    public CommonResult<PreserveOrderPageVO> list(@AuthenticationPrincipal RepairPerson repairPerson) {
-
-        QueryWrapper<RepairPerson> wrapper = new QueryWrapper<RepairPerson>()
+        QueryWrapper<PreserveOrder> wrapper = new QueryWrapper<PreserveOrder>()
                 .eq("person_id", repairPerson.getId());
-
+        Page<PreserveOrder> page = preserveOrderService.page(new Page<>(param.getPageNum(), param.getPageSize()), wrapper);
+        PreserveOrderPageVO pageVO = new PreserveOrderPageVO();
+        pageVO.setTotalNum(page.getTotal());
+        pageVO.setTotalPage(page.getPages());
+        pageVO.setList(page.getRecords());
+        return CommonResult.success(pageVO);
     }
 }
