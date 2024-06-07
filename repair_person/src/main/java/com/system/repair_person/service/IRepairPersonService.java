@@ -2,6 +2,7 @@ package com.system.repair_person.service;
 
 import com.system.repair_person.model.RepairPerson;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * <p>
@@ -13,4 +14,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IRepairPersonService extends IService<RepairPerson> {
 
+
+
+    String login(String username, String passwd);
+
+    UserDetails loadUserByUsername(String username);
+
+    RepairPerson getByUsername(String username);
 }

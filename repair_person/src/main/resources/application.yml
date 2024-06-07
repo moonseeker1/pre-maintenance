@@ -1,6 +1,6 @@
 spring:
   application:
-    name: mall-admin
+    name: repairPerson
   profiles:
     active: dev #???????
   servlet:
@@ -35,7 +35,7 @@ secure:
       - /favicon.ico
       - /actuator/**
       - /druid/**
-      - /system/admin/login
+      - /system/r/repairPerson/login
       - /admin/info
       - /admin/logout
 
