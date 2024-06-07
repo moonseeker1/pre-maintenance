@@ -2,6 +2,7 @@ package com.system.admin.service;
 
 import com.system.admin.model.PreserveOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.system.admin.vo.PreserveOrderDetailsVO;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IPreserveOrderService extends IService<PreserveOrder> {
 
+    PreserveOrderDetailsVO getPreserveOrderDetails(Integer preserveOrderId);
 }
