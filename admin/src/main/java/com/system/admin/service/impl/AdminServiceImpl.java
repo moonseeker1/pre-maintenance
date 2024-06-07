@@ -168,7 +168,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         password=passwordEncoder.encode(password);
         admin.setPasswd(password);
         admin.setEmail(param.getEmail());
-        admin.setNickname(param.getNickname());
+        admin.setName(param.getNickname());
         int rows =adminMapper.updateById(admin);
         return rows > 0;
     }
