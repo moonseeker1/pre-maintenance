@@ -4,14 +4,15 @@ package com.system.repair_person.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.common.api.CommonResult;
+import com.system.repair_person.bo.RepairPersonUserDetails;
 import com.system.repair_person.model.PreserveOrder;
-import com.system.repair_person.model.RepairPerson;
 import com.system.repair_person.param.PreserveOrderPageParam;
 import com.system.repair_person.service.IPreserveOrderService;
 import com.system.repair_person.vo.PreserveOrderPageVO;
-import com.system.security.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,11 +33,12 @@ public class PreserveOrderController {
     private IPreserveOrderService preserveOrderService;
 
     @GetMapping("/list")
-    public CommonResult<PreserveOrderPageVO> list(@AuthenticationPrincipal RepairPerson repairPerson
-                                                , PreserveOrderPageParam param) {
-
+    public CommonResult<PreserveOrderPageVO> list(PreserveOrderPageParam param) {
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        Authentication auth = ctx.getAuthentication();
+        RepairPersonUserDetails repairPersonUserDetails = (RepairPersonUserDetails) auth.getPrincipal();
         QueryWrapper<PreserveOrder> wrapper = new QueryWrapper<PreserveOrder>()
-                .eq("person_id", repairPerson.getId());
+                .eq("person_id", repairPersonUserDetails.getRepairPerson().getId());
         Page<PreserveOrder> page = preserveOrderService.page(new Page<>(param.getPageNum(), param.getPageSize()), wrapper);
         PreserveOrderPageVO pageVO = new PreserveOrderPageVO();
         pageVO.setTotalNum(page.getTotal());

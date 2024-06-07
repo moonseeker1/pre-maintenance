@@ -2,7 +2,7 @@ spring:
   application:
     name: repairPerson
   profiles:
-    active: dev #???????
+    active: repairPerson
   servlet:
     multipart:
       enabled: true #??????
@@ -36,6 +36,6 @@ secure:
       - /actuator/**
       - /druid/**
       - /system/r/repairPerson/login
-      - /admin/info
+      - /system/r/repairPerson/login
       - /admin/logout
 

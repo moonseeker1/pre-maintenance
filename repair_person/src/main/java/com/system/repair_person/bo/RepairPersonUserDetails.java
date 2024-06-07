@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Arrays;
 import java.util.Collection;
 
+
 public class RepairPersonUserDetails implements UserDetails {
     private final RepairPerson repairPerson;
 
@@ -49,8 +50,9 @@ public class RepairPersonUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+    public RepairPerson getRepairPerson() {
+        return repairPerson;
+    }
 
-
-    public RepairPerson getRepairPerson(){return repairPerson;}
 
 }

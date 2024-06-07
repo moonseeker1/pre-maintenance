@@ -10,6 +10,7 @@ import com.system.admin.param.RepairPersonPageParam;
 import com.system.admin.service.IRepairPersonService;
 import com.system.admin.vo.RepairPersonPageVO;
 import com.system.common.api.CommonResult;
+import com.system.common.exception.Asserts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,11 @@ public class RepairPersonController {
         RepairPerson repairPerson = new RepairPerson();
         repairPerson.setEmail(param.getEmail());
         repairPerson.setUsername(param.getUsername());
+        QueryWrapper<RepairPerson> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username",param.getUsername());
+        if(!repairPersonService.list(queryWrapper).isEmpty()){
+            Asserts.fail("用户名已存在");
+        }
         String passwd = param.getPasswd();
         passwd=passwordEncoder.encode(passwd); // encode password
         repairPerson.setPasswd(passwd);

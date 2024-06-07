@@ -4,13 +4,15 @@ package com.system.repair_person.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.common.api.CommonResult;
+import com.system.repair_person.bo.RepairPersonUserDetails;
 import com.system.repair_person.model.RepairOrder;
-import com.system.repair_person.model.RepairPerson;
 import com.system.repair_person.param.RepairOrderPageParam;
 import com.system.repair_person.service.IRepairOrderService;
 import com.system.repair_person.vo.RepairOrderPageVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,11 +32,12 @@ public class RepairOrderController {
     private IRepairOrderService repairOrderService;
 
     @GetMapping("/list")
-    public CommonResult<RepairOrderPageVO> list(@AuthenticationPrincipal RepairPerson repairPerson
-            , RepairOrderPageParam param) {
-
+    public CommonResult<RepairOrderPageVO> list(RepairOrderPageParam param) {
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        Authentication auth = ctx.getAuthentication();
+        RepairPersonUserDetails repairPersonUserDetails = (RepairPersonUserDetails) auth.getPrincipal();
         QueryWrapper<RepairOrder> wrapper = new QueryWrapper<RepairOrder>()
-                .eq("person_id", repairPerson.getId());
+                .eq("person_id", repairPersonUserDetails.getRepairPerson().getId());
         Page<RepairOrder> page = repairOrderService.page(new Page<>(param.getPageNum(), param.getPageSize()), wrapper);
         RepairOrderPageVO pageVO = new RepairOrderPageVO();
         pageVO.setTotalNum(page.getTotal());
