@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2024-06-07
  */
 @RestController
-@RequestMapping("/repair-person")
+@RequestMapping("/system/repairPerson")
 public class RepairPersonController {
 
     @Autowired
