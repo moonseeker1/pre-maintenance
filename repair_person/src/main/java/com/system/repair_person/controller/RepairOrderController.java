@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -44,5 +42,16 @@ public class RepairOrderController {
         pageVO.setTotalPage(page.getPages());
         pageVO.setList(page.getRecords());
         return CommonResult.success(pageVO);
+    }
+
+    @PutMapping("/{id}")
+    public CommonResult finish(@PathVariable Integer id){
+        RepairOrder order = repairOrderService.getById(id);
+        order.setState(1);
+        boolean flag = repairOrderService.updateById(order);
+        if (flag) {
+            return CommonResult.success();
+        }
+        return CommonResult.failed();
     }
 }
