@@ -33,7 +33,7 @@ public class RepairPersonController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
-    public CommonResult getById(@PathVariable Integer id){
+    public CommonResult<RepairPerson> getById(@PathVariable Integer id){
         return CommonResult.success(repairPersonService.getById(id));
     }
 
@@ -87,7 +87,7 @@ public class RepairPersonController {
     public CommonResult<RepairPersonPageVO> list(RepairPersonPageParam param){
         QueryWrapper<RepairPerson> wrapper = new QueryWrapper<RepairPerson>()
                 .like(param.getEmail() != null, "email", param.getEmail())
-                .like(param.getName() != null, "nickname", param.getName());
+                .like(param.getName() != null, "name", param.getName());
         Page<RepairPerson> page = repairPersonService.page(new Page<>(param.getPageNum(), param.getPageSize()), wrapper);
         RepairPersonPageVO vo = new RepairPersonPageVO();
         vo.setList(page.getRecords());
