@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -51,15 +50,12 @@ public class Equipment implements Serializable {
     @TableField("state")
     private Integer state;
 
-    @ApiModelProperty(value = "维护次数")
     @TableField("preserve_cycle")
     private Integer preserveCycle;
 
-    @ApiModelProperty(value = "产出")
     @TableField("output")
     private Integer output;
 
-    @ApiModelProperty(value = "使用年限")
     @TableField("service_life")
     private Integer serviceLife;
 

@@ -54,7 +54,7 @@ public class PreserveOrderServiceImpl extends ServiceImpl<PreserveOrderMapper, P
             equipmentDetails.setProducerName(equipmentType.getProducerName());
             list1.add(equipmentDetails);
         }
-        preserveOrderDetailsVO.setEquipmentDetails(list1);
+        preserveOrderDetailsVO.setList(list1);
         return preserveOrderDetailsVO;
     }
 }
