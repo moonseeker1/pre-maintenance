@@ -68,7 +68,7 @@ public class AdminController {
             tokenMap.put("tokenHead", tokenHead);
             return CommonResult.success(tokenMap);
         }else{
-            return CommonResult.failed("");
+            return CommonResult.failed();
         }
     }
 
