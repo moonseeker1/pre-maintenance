@@ -3,6 +3,7 @@ package com.system.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.admin.bo.AdminUserDetails;
 import com.system.admin.model.Admin;
 import com.system.admin.model.Role;
 import com.system.admin.param.AdminPageParam;
@@ -15,6 +16,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -117,4 +121,13 @@ public class AdminController {
         vo.setList(page.getRecords());
         return CommonResult.success(vo);
     }
+    @GetMapping("/info")
+    public CommonResult<Admin> getAdminInfo(){
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        Authentication auth = ctx.getAuthentication();
+        AdminUserDetails adminUserDetails = (AdminUserDetails) auth.getPrincipal();
+        Admin admin = adminService.getById(adminUserDetails.getAdmin().getId());
+        return CommonResult.success(admin);
+    }
+
 }
