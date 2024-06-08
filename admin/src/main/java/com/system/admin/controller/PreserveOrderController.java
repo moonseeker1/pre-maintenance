@@ -4,7 +4,7 @@ package com.system.admin.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.admin.model.PreserveOrder;
-import com.system.admin.param.PreserveOrderParam;
+import com.system.admin.param.PreserveOrderPageParam;
 import com.system.admin.service.IPreserveOrderService;
 import com.system.admin.service.IRepairPersonService;
 import com.system.admin.vo.PreserveOrderDetailsVO;
@@ -38,7 +38,7 @@ public class PreserveOrderController {
     }
 
     @GetMapping
-    public CommonResult<PreserveOrderPageVO> list(PreserveOrderParam param){
+    public CommonResult<PreserveOrderPageVO> list(PreserveOrderPageParam param){
         QueryWrapper<PreserveOrder> wrapper = new QueryWrapper<PreserveOrder>()
                 .like(param.getPersonName() != null, "person_name", param.getPersonName())
                 .eq(param.getState()!=null,"state",param.getState());
