@@ -2,6 +2,7 @@ package com.system.repair_person.service;
 
 import com.system.repair_person.model.PreserveOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.system.repair_person.vo.PreserveOrderDetailsVO;
 
 /**
  * <p>
@@ -14,4 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IPreserveOrderService extends IService<PreserveOrder> {
 
     boolean setEquipment(Integer id);
+
+    PreserveOrderDetailsVO getPreserveOrderDetails(Integer preserveOrderId);
 }

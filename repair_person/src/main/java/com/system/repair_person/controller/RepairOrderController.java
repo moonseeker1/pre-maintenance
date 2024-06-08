@@ -8,6 +8,7 @@ import com.system.repair_person.bo.RepairPersonUserDetails;
 import com.system.repair_person.model.RepairOrder;
 import com.system.repair_person.param.RepairOrderPageParam;
 import com.system.repair_person.service.IRepairOrderService;
+import com.system.repair_person.vo.RepairOrderDetailsVO;
 import com.system.repair_person.vo.RepairOrderPageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -45,7 +46,11 @@ public class RepairOrderController {
         pageVO.setList(page.getRecords());
         return CommonResult.success(pageVO);
     }
-
+    @GetMapping("/details/{repairOrderId}")
+    public CommonResult<RepairOrderDetailsVO> getRepairOrderDetails(@PathVariable Integer repairOrderId){
+        RepairOrderDetailsVO repairOrderDetailsVO=repairOrderService.getRepairOrderDetails(repairOrderId);
+        return CommonResult.success(repairOrderDetailsVO);
+    }
     @PutMapping("/{id}")
     @Transactional
     public CommonResult finish(@PathVariable Integer id){

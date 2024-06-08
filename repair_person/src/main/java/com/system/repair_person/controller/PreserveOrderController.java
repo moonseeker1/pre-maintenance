@@ -8,6 +8,7 @@ import com.system.repair_person.bo.RepairPersonUserDetails;
 import com.system.repair_person.model.PreserveOrder;
 import com.system.repair_person.param.PreserveOrderPageParam;
 import com.system.repair_person.service.IPreserveOrderService;
+import com.system.repair_person.vo.PreserveOrderDetailsVO;
 import com.system.repair_person.vo.PreserveOrderPageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -57,5 +58,10 @@ public class PreserveOrderController {
             return CommonResult.success();
         }
         return CommonResult.failed();
+    }
+    @GetMapping("/details/{preserveOrderId}")
+    public CommonResult<PreserveOrderDetailsVO> getPreserveOrderDetails(@PathVariable Integer preserveOrderId){
+        PreserveOrderDetailsVO preserveOrderDetailsVO =preserveOrderService.getPreserveOrderDetails(preserveOrderId);
+        return CommonResult.success(preserveOrderDetailsVO);
     }
 }

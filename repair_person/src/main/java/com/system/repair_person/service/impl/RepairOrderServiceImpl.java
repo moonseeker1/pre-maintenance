@@ -2,16 +2,15 @@ package com.system.repair_person.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.system.repair_person.mapper.EquipmentMapper;
-import com.system.repair_person.mapper.OrderEquipmentFaultRelationMapper;
-import com.system.repair_person.mapper.RepairOrderMapper;
-import com.system.repair_person.model.Equipment;
-import com.system.repair_person.model.OrderEquipmentFaultRelation;
-import com.system.repair_person.model.RepairOrder;
+import com.system.repair_person.dao.EquipmentAndFaultItem;
+import com.system.repair_person.mapper.*;
+import com.system.repair_person.model.*;
 import com.system.repair_person.service.IRepairOrderService;
+import com.system.repair_person.vo.RepairOrderDetailsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +27,12 @@ public class RepairOrderServiceImpl extends ServiceImpl<RepairOrderMapper, Repai
     OrderEquipmentFaultRelationMapper orderEquipmentFaultRelationMapper;
     @Autowired
     EquipmentMapper equipmentMapper;
+    @Autowired
+    RepairOrderMapper repairOrderMapper;
+    @Autowired
+    FaultMapper faultMapper;
+    @Autowired
+    EquipmentTypeMapper equipmentTypeMapper;
     @Override
     public boolean setEquipment(Integer id) {
         QueryWrapper<OrderEquipmentFaultRelation> queryWrapper = new QueryWrapper<>();
@@ -42,5 +47,32 @@ public class RepairOrderServiceImpl extends ServiceImpl<RepairOrderMapper, Repai
         }
 
         return true;
+    }
+
+    @Override
+    public RepairOrderDetailsVO getRepairOrderDetails(Integer repairOrderId) {
+        RepairOrderDetailsVO repairOrderDetailsVO = new RepairOrderDetailsVO();
+        RepairOrder repairOrder = repairOrderMapper.selectById(repairOrderId);
+        repairOrderDetailsVO.setPersonName(repairOrder.getPersonName());
+        repairOrderDetailsVO.setRepairOrderId(repairOrder.getId());
+        repairOrderDetailsVO.setState(repairOrder.getState());
+        QueryWrapper<OrderEquipmentFaultRelation> wrapper = new QueryWrapper<OrderEquipmentFaultRelation>()
+                .eq("order_id", repairOrderId);
+        List<OrderEquipmentFaultRelation> list = orderEquipmentFaultRelationMapper.selectList(wrapper);
+        List<EquipmentAndFaultItem> list1 = new ArrayList<>();
+        for(OrderEquipmentFaultRelation orderEquipmentFaultRelation: list){
+            Equipment equipment = equipmentMapper.selectById(orderEquipmentFaultRelation.getEquipmentId());
+            EquipmentType equipmentType = equipmentTypeMapper.selectById(equipment.getEquipmentTypeId());
+            Fault fault = faultMapper.selectById(orderEquipmentFaultRelation.getFaultId());
+            EquipmentAndFaultItem equipmentAndFaultItem = new EquipmentAndFaultItem();
+            equipmentAndFaultItem.setProducerName(equipmentType.getProducerName());
+            equipmentAndFaultItem.setEquipmentTypeName(equipmentType.getName());
+            equipmentAndFaultItem.setEquipmentId(equipment.getId());
+            equipmentAndFaultItem.setSuggestion(fault.getSuggestion());
+            equipmentAndFaultItem.setFaultName(fault.getName());
+            list1.add(equipmentAndFaultItem);
+        }
+        repairOrderDetailsVO.setList(list1);
+        return repairOrderDetailsVO;
     }
 }
