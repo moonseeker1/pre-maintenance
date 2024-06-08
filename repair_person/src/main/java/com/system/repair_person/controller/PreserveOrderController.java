@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.common.api.CommonResult;
 import com.system.repair_person.bo.RepairPersonUserDetails;
 import com.system.repair_person.model.PreserveOrder;
-import com.system.repair_person.param.PreserveOrderPageParam;
+import com.system.repair_person.param.RepairPersonPreserveOrderPageParam;
 import com.system.repair_person.service.IPreserveOrderService;
 import com.system.repair_person.vo.PreserveOrderDetailsVO;
 import com.system.repair_person.vo.PreserveOrderPageVO;
@@ -33,7 +33,7 @@ public class PreserveOrderController {
     private IPreserveOrderService preserveOrderService;
 
     @GetMapping("/list")
-    public CommonResult<PreserveOrderPageVO> list(PreserveOrderPageParam param) {
+    public CommonResult<PreserveOrderPageVO> list(RepairPersonPreserveOrderPageParam param) {
         SecurityContext ctx = SecurityContextHolder.getContext();
         Authentication auth = ctx.getAuthentication();
         RepairPersonUserDetails repairPersonUserDetails = (RepairPersonUserDetails) auth.getPrincipal();
