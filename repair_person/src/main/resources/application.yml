@@ -36,6 +36,5 @@ secure:
       - /actuator/**
       - /druid/**
       - /system/r/repairPerson/login
-      - /system/r/repairPerson/login
-      - /admin/logout
+
 

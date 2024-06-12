@@ -56,6 +56,7 @@ public class PreserveOrderController {
         PreserveOrder preserveOrder = preserveOrderService.getById(preserveOrderId);
         preserveOrder.setPersonId(repairPersonId);
         preserveOrder.setPersonName(repairPersonService.getById(repairPersonId).getName());
+        preserveOrder.setState(1);
         boolean flag = preserveOrderService.updateById(preserveOrder);
         if(flag){
             return CommonResult.success();

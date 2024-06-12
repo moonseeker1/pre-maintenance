@@ -52,7 +52,7 @@ public class PreserveOrderController {
     public CommonResult finish(@PathVariable Integer id){
         PreserveOrder order = preserveOrderService.getById(id);
         boolean flag1 = preserveOrderService.setEquipment(id);
-        order.setState(1);
+        order.setState(2);
         boolean flag2 = preserveOrderService.updateById(order);
         if (flag1&&flag2) {
             return CommonResult.success();
