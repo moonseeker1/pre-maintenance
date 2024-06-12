@@ -3,7 +3,9 @@ package com.system.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.admin.mapper.RoleResourceRelationMapper;
 import com.system.admin.model.Resource;
+import com.system.admin.model.RoleResourceRelation;
 import com.system.admin.param.AddResourceParam;
 import com.system.admin.param.ModifyResourceParam;
 import com.system.admin.param.ResourcePageParam;
@@ -29,6 +31,9 @@ public class ResourceController {
 
     @Autowired
     private IResourceService resourceService;
+
+    @Autowired
+    private RoleResourceRelationMapper roleResourceRelationMapper;
 
     @GetMapping("/{id}")
     public CommonResult<Resource> getById(@PathVariable Integer id){
@@ -64,6 +69,9 @@ public class ResourceController {
 
     @DeleteMapping("/{id}")
     public CommonResult deleteById(@PathVariable Integer id){
+        // 删除角色资源关系表
+        roleResourceRelationMapper.delete(new QueryWrapper<RoleResourceRelation>()
+                .eq("role_id", id));
         boolean flag = resourceService.removeById(id);
         if (flag) {
             return CommonResult.success();

@@ -4,7 +4,9 @@ package com.system.admin.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.system.admin.bo.AdminUserDetails;
+import com.system.admin.mapper.AdminRoleRelationMapper;
 import com.system.admin.model.Admin;
+import com.system.admin.model.AdminRoleRelation;
 import com.system.admin.model.Role;
 import com.system.admin.param.AdminPageParam;
 import com.system.admin.param.ModifyAdminParam;
@@ -44,6 +46,9 @@ public class AdminController {
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+
+    @Autowired
+    private AdminRoleRelationMapper adminRoleRelationMapper;
 
     //注册
     @PostMapping("/register")
@@ -102,6 +107,10 @@ public class AdminController {
 
     @DeleteMapping("/{id}")
     public CommonResult deleteById(@PathVariable Integer id){
+        //删除用户角色关系表
+        QueryWrapper<AdminRoleRelation> wrapper = new QueryWrapper<AdminRoleRelation>()
+                .eq("admin_id", id);
+        adminRoleRelationMapper.delete(wrapper);
         Boolean flag=adminService.removeById(id);
         if(flag){
             return CommonResult.success();
