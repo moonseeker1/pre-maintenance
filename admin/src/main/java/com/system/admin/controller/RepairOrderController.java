@@ -13,6 +13,7 @@ import com.system.admin.vo.RepairOrderDetailsVO;
 import com.system.admin.vo.RepairOrderPageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -60,13 +61,15 @@ public class RepairOrderController {
         vo.setList(page.getRecords());
         return CommonResult.success(vo);
     }
+    @Transactional
     @DeleteMapping("/{repairOrderId}")
     public CommonResult deleteRepairOrder(@PathVariable Integer repairOrderId){
         if(repairOrderService.getById(repairOrderId).getState()!=1){
             return CommonResult.failed("订单未完成，无法删除");
         }
+        boolean flag2=orderEquipmentFaultRelationService.remove(new QueryWrapper<OrderEquipmentFaultRelation>().eq("order_id",repairOrderId));
         boolean flag1=repairOrderService.removeById(repairOrderId);
-        boolean flag2=orderEquipmentFaultRelationService.remove(new QueryWrapper<OrderEquipmentFaultRelation>().eq("repair_order_id",repairOrderId));
+
         if(flag1&&flag2){
             return CommonResult.success(null);
         }else{

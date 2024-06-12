@@ -13,6 +13,7 @@ import com.system.admin.vo.PreserveOrderDetailsVO;
 import com.system.admin.vo.PreserveOrderPageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -67,14 +68,17 @@ public class PreserveOrderController {
         }
             return CommonResult.failed();
     }
+    @Transactional
     @DeleteMapping("/{preserveOrderId}")
     public CommonResult delete(@PathVariable Integer preserveOrderId){
         if(preserveOrderService.getById(preserveOrderId).getState()!=2){
             return CommonResult.failed("订单未完成，无法删除");
         }
-        boolean flag1 = preserveOrderService.removeById(preserveOrderId);
-        QueryWrapper<PreserveEquipmentRelation> wrapper = new QueryWrapper<PreserveEquipmentRelation>().eq("preserve_order_id",preserveOrderId);
+        QueryWrapper<PreserveEquipmentRelation> wrapper = new QueryWrapper<PreserveEquipmentRelation>().eq("order_id",preserveOrderId);
         boolean flag2 = preserveEquipmentRelationService.remove(wrapper);
+        boolean flag1 = preserveOrderService.removeById(preserveOrderId);
+
+
         if(flag1&&flag2){
             return CommonResult.success();
         }
