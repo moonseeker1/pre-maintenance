@@ -25,6 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -165,7 +166,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         admin.setId(id);
         admin.setUsername(param.getUsername());
         String password= param.getPasswd();
-        if(password!=null){
+        if(!Objects.equals(password, "")){
             String encodePassword = passwordEncoder.encode(password);
             admin.setPasswd(encodePassword);
         }

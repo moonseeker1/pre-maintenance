@@ -3,9 +3,11 @@ package com.system.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.admin.model.OrderEquipmentFaultRelation;
 import com.system.admin.model.RepairOrder;
 import com.system.admin.param.AddRepairOrderParam;
 import com.system.admin.param.RepairOrderPageParam;
+import com.system.admin.service.IOrderEquipmentFaultRelationService;
 import com.system.admin.service.IRepairOrderService;
 import com.system.admin.vo.RepairOrderDetailsVO;
 import com.system.admin.vo.RepairOrderPageVO;
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.*;
 public class RepairOrderController {
     @Autowired
     private IRepairOrderService repairOrderService;
+    @Autowired
+    private IOrderEquipmentFaultRelationService orderEquipmentFaultRelationService;
     @PostMapping
     public CommonResult generateRepairOrder(@RequestBody AddRepairOrderParam addRepairOrderParam){
         boolean flag=repairOrderService.generateRepairOrder(addRepairOrderParam);
@@ -55,6 +59,18 @@ public class RepairOrderController {
         vo.setTotalPage(page.getPages());
         vo.setList(page.getRecords());
         return CommonResult.success(vo);
-
+    }
+    @DeleteMapping("/{repairOrderId}")
+    public CommonResult deleteRepairOrder(@PathVariable Integer repairOrderId){
+        if(repairOrderService.getById(repairOrderId).getState()!=1){
+            return CommonResult.failed("订单未完成，无法删除");
+        }
+        boolean flag1=repairOrderService.removeById(repairOrderId);
+        boolean flag2=orderEquipmentFaultRelationService.remove(new QueryWrapper<OrderEquipmentFaultRelation>().eq("repair_order_id",repairOrderId));
+        if(flag1&&flag2){
+            return CommonResult.success(null);
+        }else{
+            return CommonResult.failed();
+        }
     }
 }
