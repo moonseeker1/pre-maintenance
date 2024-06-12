@@ -3,8 +3,12 @@ package com.system.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.system.admin.mapper.AdminRoleRelationMapper;
+import com.system.admin.mapper.RoleResourceRelationMapper;
+import com.system.admin.model.AdminRoleRelation;
 import com.system.admin.model.Resource;
 import com.system.admin.model.Role;
+import com.system.admin.model.RoleResourceRelation;
 import com.system.admin.param.AddRoleParam;
 import com.system.admin.param.ModifyRoleParam;
 import com.system.admin.param.RolePageParam;
@@ -31,6 +35,12 @@ public class RoleController {
 
     @Autowired
     private IRoleService roleService;
+
+    @Autowired
+    private AdminRoleRelationMapper adminRoleRelationMapper;
+
+    @Autowired
+    private RoleResourceRelationMapper roleResourceRelationMapper;
 
     @PostMapping
     public CommonResult insert(@RequestBody AddRoleParam param){
@@ -63,6 +73,13 @@ public class RoleController {
 
     @DeleteMapping("/{id}")
     public CommonResult deleteById(@PathVariable Integer id){
+        // 删除角色与管理员的关系
+        QueryWrapper<AdminRoleRelation> wrapper = new QueryWrapper<AdminRoleRelation>()
+                .eq("role_id", id);
+        adminRoleRelationMapper.delete(wrapper);
+        // 删除角色与资源的关系
+        roleResourceRelationMapper.delete(new QueryWrapper<RoleResourceRelation>()
+                .eq("role_id", id));
         boolean flag = roleService.removeById(id);
         if (flag) {
             return CommonResult.success();
