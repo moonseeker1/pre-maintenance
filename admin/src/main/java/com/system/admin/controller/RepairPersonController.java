@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
  *  前端控制器
@@ -94,5 +96,10 @@ public class RepairPersonController {
         vo.setTotalNum(page.getTotal());
         vo.setTotalPage(page.getPages());
         return CommonResult.success(vo);
+    }
+
+    @GetMapping("/listAll")
+    public CommonResult<List<RepairPerson>> listAll(){
+        return CommonResult.success(repairPersonService.list());
     }
 }
