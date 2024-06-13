@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * mall-security模块相关配置
+ * security模块相关配置
  */
 @Configuration
 public class AdminSecurityConfig {
