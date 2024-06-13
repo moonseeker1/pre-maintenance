@@ -12,7 +12,6 @@ import java.io.IOException;
 
 /**
  * 自定义无权限访问的返回结果
- * Created by macro on 2018/4/26.
  */
 public class RestfulAccessDeniedHandler implements AccessDeniedHandler{
     @Override
