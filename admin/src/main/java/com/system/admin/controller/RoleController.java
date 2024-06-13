@@ -17,6 +17,7 @@ import com.system.admin.service.IRoleService;
 import com.system.admin.vo.RolePageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -72,6 +73,7 @@ public class RoleController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public CommonResult deleteById(@PathVariable Integer id){
         // 删除角色与管理员的关系
         QueryWrapper<AdminRoleRelation> wrapper = new QueryWrapper<AdminRoleRelation>()

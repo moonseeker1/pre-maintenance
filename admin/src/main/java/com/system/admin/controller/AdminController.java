@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -106,6 +107,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public CommonResult deleteById(@PathVariable Integer id){
         //删除用户角色关系表
         QueryWrapper<AdminRoleRelation> wrapper = new QueryWrapper<AdminRoleRelation>()

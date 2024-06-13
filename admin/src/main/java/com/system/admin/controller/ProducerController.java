@@ -14,6 +14,7 @@ import com.system.admin.vo.ProducerPageVO;
 import com.system.common.api.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -79,6 +80,7 @@ public class ProducerController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public CommonResult deleteById(@PathVariable Integer id){
 
         QueryWrapper<EquipmentType> wrapper = new QueryWrapper<EquipmentType>()

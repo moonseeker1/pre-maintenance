@@ -15,6 +15,7 @@ import com.system.admin.service.IProducerService;
 import com.system.admin.vo.EquipmentTypePageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,6 +61,7 @@ public class EquipmentTypeController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public CommonResult deleteById(@PathVariable Integer id){
 
         QueryWrapper<Equipment> wrapper = new QueryWrapper<Equipment>()

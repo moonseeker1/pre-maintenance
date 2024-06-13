@@ -13,6 +13,7 @@ import com.system.admin.service.IResourceService;
 import com.system.admin.vo.ResourcePageVO;
 import com.system.common.api.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -68,6 +69,7 @@ public class ResourceController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public CommonResult deleteById(@PathVariable Integer id){
         // 删除角色资源关系表
         roleResourceRelationMapper.delete(new QueryWrapper<RoleResourceRelation>()
