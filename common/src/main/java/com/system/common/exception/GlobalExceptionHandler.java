@@ -1,6 +1,5 @@
 package com.system.common.exception;
 
-import cn.hutool.core.util.StrUtil;
 import com.system.common.api.CommonResult;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.SQLSyntaxErrorException;
 
 /**
  * 全局异常处理类
@@ -63,13 +61,5 @@ public class GlobalExceptionHandler {
         message = "记录已存在或与其他数据绑定，不允许操作！";
         return CommonResult.failed(message);
     }
-    @ResponseBody
-    @ExceptionHandler(value = SQLSyntaxErrorException.class)
-    public CommonResult handleSQLSyntaxErrorException(SQLSyntaxErrorException e) {
-        String message = e.getMessage();
-        if (StrUtil.isNotEmpty(message) && message.contains("denied")) {
-            message = "演示环境暂无修改权限，如需修改数据可本地搭建后台服务！";
-        }
-        return CommonResult.failed(message);
-    }
+
 }

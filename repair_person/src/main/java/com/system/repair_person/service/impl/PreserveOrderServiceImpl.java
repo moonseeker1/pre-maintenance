@@ -16,6 +16,7 @@ import com.system.repair_person.vo.PreserveOrderDetailsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class PreserveOrderServiceImpl extends ServiceImpl<PreserveOrderMapper, P
             Equipment equipment = new Equipment();
             equipment.setState(0);
             equipment.setId(equipmentId);
+            equipment.setLastPreserveTime(LocalDateTime.now());
             equipmentMapper.updateById(equipment);
         }
 
