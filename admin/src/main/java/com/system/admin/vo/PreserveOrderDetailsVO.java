@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 @Data
 public class PreserveOrderDetailsVO {
-    List<EquipmentDetails> list;
+    List<EquipmjentDetails> list;
     Integer preserveOrderId;
     String repairPersonName;
     Integer state;
