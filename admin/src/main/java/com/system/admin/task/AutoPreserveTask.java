@@ -7,16 +7,20 @@ import com.system.admin.model.PreserveEquipmentRelation;
 import com.system.admin.model.PreserveOrder;
 import com.system.admin.service.IEquipmentService;
 import com.system.admin.service.IPreserveOrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class AutoPreserveTask {
     @Autowired
     private IEquipmentService equipmentService;
@@ -27,6 +31,7 @@ public class AutoPreserveTask {
     @Scheduled(cron = "0 */1 * * * ?")
     @Transactional
     public void executeTask(){
+        Instant start = Instant.now();
         QueryWrapper<Equipment> equipmentQueryWrapper = new QueryWrapper<>();
         equipmentQueryWrapper.eq("state", 0);
         List<Equipment> list = equipmentService.list(equipmentQueryWrapper);
@@ -69,6 +74,11 @@ public class AutoPreserveTask {
                 preserveEquipmentRelationMapper.insert(preserveEquipmentRelation);
             }
         }
+        Instant end = Instant.now();
+        log.info("Task ended at: {}", end);
+
+        Duration duration = Duration.between(start, end);
+        log.info("Task execution time: {} milliseconds", duration.toMillis());
 
     }
 }
