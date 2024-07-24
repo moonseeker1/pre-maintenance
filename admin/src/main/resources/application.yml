@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: system-admin
+  profiles:
+    active: dev #???????
+  servlet:
+    multipart:
+      enabled: true #??????
+      max-file-size: 10MB #?????????10M
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  redis:
+    # 地址
+    host: localhost
+    # 端口，默认为6379
+    port: 6379
+    # 数据库索引
+    database: 0
+    # 密码
+    password:
+    # 连接超时时间
+    timeout: 10s
+
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
+jwt:
+  tokenHeader: Authorization #JWT??????
+  secret: mall-admin-secret #JWT????????
+  expiration: 604800 #JWT??????(60*60*24*7)
+  tokenHead: 'Bearer '  #JWT???????
+secure:
+  ignored:
+    urls: #???????
+      - /swagger-ui/
+      - /swagger-resources/**
+      - /**/v2/api-docs
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.map
+      - /favicon.ico
+      - /actuator/**
+      - /druid/**
+      - /system/admin/login
+      - /system/admin/register
+      - /system/admin/info
+      - /admin/logout
+      - /minio/upload
+

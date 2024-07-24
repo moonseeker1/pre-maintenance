@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.admin.mapper.AdminRoleRelationMapper">
+
+    <select id="getResourceList" resultType="com.system.admin.model.Resource"
+            parameterType="java.lang.Integer">
+        select r.id, r.create_time,r.update_time,r.name, r.url
+        from admin_role_relation arr
+                    left join role ro on arr.role_id = ro.id
+                    left join role_resource_relation rrr on ro.id = rrr.role_id
+                    left join resource r on r.id = rrr.resource_id
+            where arr.admin_id = #{adminId}
+            and r.id is not null
+    </select>
+</mapper>
