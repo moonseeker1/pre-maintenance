@@ -10,10 +10,10 @@
     <description>system</description>
 
     <modules>
-        <module>admin</module>
         <module>common</module>
-        <module>repair_person</module>
         <module>security</module>
+        <module>admin</module>
+        <module>repair_person</module>
     </modules>
 
     <properties>
@@ -146,16 +146,34 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.6.13</version>
+                    <configuration>
+                        <mainClass>com.system.admin.AdminApplication</mainClass>
+                        <skip>false</skip>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
         </plugins>
     </build>
 
