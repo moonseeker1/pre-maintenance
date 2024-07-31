@@ -4,6 +4,9 @@ import com.system.admin.model.Equipment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -15,4 +18,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface EquipmentMapper extends BaseMapper<Equipment> {
 
+    List<Integer> selectIdByStatus(LocalDateTime now);
 }

@@ -5,10 +5,9 @@
     <groupId>nwpu</groupId>
     <artifactId>system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
     <name>system</name>
     <description>system</description>
-
+    <packaging>pom</packaging>
     <modules>
         <module>common</module>
         <module>security</module>
@@ -129,6 +128,36 @@
             <artifactId>spring-data-commons</artifactId>
             <version>2.3.1.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.52</version>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.12.3</version>
+        </dependency>
+        <!--redis依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!--common-pool-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        <!--Jackson依赖-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -161,8 +190,9 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>2.6.13</version>
                     <configuration>
-                        <mainClass>com.system.admin.AdminApplication</mainClass>
                         <skip>false</skip>
+                        <classifier>exec</classifier>
+                        <mainClass>com.system.admin.AdminApplication</mainClass>
                     </configuration>
                     <executions>
                         <execution>

@@ -1,4 +1,4 @@
-package com.system.admin.service.Impl;
+package com.system.admin.service.impl;
 
 import com.system.admin.model.Equipment;
 import com.system.admin.mapper.EquipmentMapper;

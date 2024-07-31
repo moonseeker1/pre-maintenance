@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.system.admin.mapper.EquipmentMapper">
 
+    <select id="selectIdByStatus" resultType="integer">
+        SELECT id from system_db.equipment
+        where  DATE_ADD(last_preserve_time, INTERVAL preserve_cycle MINUTE) &lt; #{now} and state = 0;
+    </select>
 </mapper>
