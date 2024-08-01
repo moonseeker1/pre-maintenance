@@ -11,7 +11,7 @@ public class MQThreadPoolConfig {
     @Bean
     public Executor taskExecutor() {
         // 核心线程数
-        int corePoolSize = 3;
+        int corePoolSize = 2;
         // 最大线程数
         int maximumPoolSize = 4;
         // 线程空闲时间（秒）
@@ -19,7 +19,7 @@ public class MQThreadPoolConfig {
         // 时间单位
         TimeUnit unit = TimeUnit.SECONDS;
         // 工作队列容量
-        int queueCapacity = 100;
+        int queueCapacity = 1000;
 
         // 创建工作队列
         BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>(queueCapacity);

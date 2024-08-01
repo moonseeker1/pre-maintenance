@@ -1,5 +1,6 @@
 package com.system.admin.task;
 
+import com.google.common.util.concurrent.RateLimiter;
 import com.system.admin.component.GeneratePreOrderSender;
 import com.system.admin.mapper.EquipmentMapper;
 import com.system.admin.mapper.PreserveEquipmentRelationMapper;
@@ -18,7 +19,6 @@ import java.util.List;
 @Component
 @Slf4j
 public class AutoPreserveTask {
-    static boolean flag = true;
     @Autowired
     private IEquipmentService equipmentService;
     @Autowired
@@ -31,26 +31,31 @@ public class AutoPreserveTask {
     private EquipmentMapper equipmentMapper;
     @Scheduled(cron = "0 */10 * * * ?")
     public void executeTask(){
-        Instant start = Instant.now();
-        LocalDateTime now = LocalDateTime.now();
-        List<Integer> list = equipmentMapper.selectIdByStatus(now);
-        int count = 0;
-        List<Integer> batchList = new ArrayList<>();
-        for(int i=0;i<list.size();i++){
-            if(count<3){
-                batchList.add(list.get(i));
-                count++;
-            }else{
-                generatePreOrderSender.sendPreOrder(batchList);
-                batchList = new ArrayList<>();
-                batchList.add(list.get(i));
-                count++;
+        while (true) {
+            Instant start = Instant.now();
+            LocalDateTime now = LocalDateTime.now();
+            List<Integer> list = equipmentMapper.selectIdByStatus(now);
+            int count = 0;
+            RateLimiter rateLimiter = RateLimiter.create(150);
+            List<Integer> batchList = new ArrayList<>();
+            for (int i = 0; i < list.size(); i++) {
+                if (count < 3) {
+                    batchList.add(list.get(i));
+                    count++;
+                } else {
+                    // 每秒500个请求
+
+                    rateLimiter.acquire(); // 这将阻塞，直到可以发送消息
+                    // 发送消息逻辑
+                    generatePreOrderSender.sendPreOrder(batchList);
+                    batchList = new ArrayList<>();
+                    batchList.add(list.get(i));
+                    count++;
+
+                }
             }
-        }
-        if(flag){
             generatePreOrderSender.sendPreOrder(batchList);
-            flag = false;
-        }
+
 
 //        List<Equipment> equipmentList = new ArrayList<>();
 //        for (Equipment equipment : list) {
@@ -78,7 +83,8 @@ public class AutoPreserveTask {
 //                count++;
 //            }
 //        }
-
-
+//
+//
+        }
     }
 }

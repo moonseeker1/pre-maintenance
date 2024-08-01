@@ -30,7 +30,7 @@ public class GeneratePreOrderReceiver {
         if(!list.isEmpty()){
             for(Integer id :list){
                 Equipment equipment1 = equipmentService.getById(id);
-                if(equipment1.getState()==0){
+                if(equipment1!=null&&equipment1.getState()==0){
                     Equipment equipment = new Equipment();
                     equipment.setState(2);
                     equipment.setId(id);

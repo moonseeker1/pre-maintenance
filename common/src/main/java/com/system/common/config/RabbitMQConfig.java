@@ -27,8 +27,8 @@ public class RabbitMQConfig {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         configurer.configure(factory, connectionFactory);
         factory.setTaskExecutor(taskExecutor); // 使用自定义的线程池
-        factory.setConcurrentConsumers(3); // 设置并发消费者数量
-        factory.setMaxConcurrentConsumers(4); // 设置最大并发消费者数量
+        factory.setConcurrentConsumers(2); // 设置并发消费者数量
+        factory.setMaxConcurrentConsumers(3); // 设置最大并发消费者数量
         factory.setMessageConverter(new Jackson2JsonMessageConverter()); // 配置消息转换器
         return factory;
     }
