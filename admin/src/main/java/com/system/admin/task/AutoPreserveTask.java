@@ -37,17 +37,16 @@ public class AutoPreserveTask {
             List<Integer> list = equipmentMapper.selectIdByStatus(now);
             int count = 0;
             RateLimiter rateLimiter = RateLimiter.create(150);
+            rateLimiter.acquire(); // 这将阻塞，直到可以发送消息
             List<Integer> batchList = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
-                if (count < 3) {
+                if (count < 12) {
                     batchList.add(list.get(i));
                     count++;
                 } else {
-                    // 每秒500个请求
-
-                    rateLimiter.acquire(); // 这将阻塞，直到可以发送消息
                     // 发送消息逻辑
                     generatePreOrderSender.sendPreOrder(batchList);
+                    count=0;
                     batchList = new ArrayList<>();
                     batchList.add(list.get(i));
                     count++;
