@@ -43,6 +43,20 @@
             <artifactId>guava</artifactId>
             <version>31.1-jre</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.13.0</version> <!-- 请确保使用的是最新版本 -->
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -62,7 +76,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.5.15</version>
                 <configuration>
-                    <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+                    <fork>true</fork>
+                    <classifier>exec</classifier>
                 </configuration>
                 <executions>
                     <execution>

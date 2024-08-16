@@ -27,6 +27,25 @@ spring:
     virtual-host: /pre
     username: pre
     password: 123456
+  mail:
+    # 发送者邮箱
+    username: 2290166829@qq.com
+    #申请到的授权码
+    password: invouaorobwoecaj
+    # 配置 SMTP 服务器地址
+    host: smtp.qq.com
+    # 端口号465或587
+    port: 465
+    protocol: smtps
+    # 默认的邮件编码为UTF-8
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+          #表示开启 DEBUG 模式，这样，邮件发送过程的日志会在控制台打印出来，方便排查错误
+          debug: true
+          ssl: true
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
 jwt:
@@ -49,6 +68,7 @@ secure:
       - /actuator/**
       - /druid/**
       - /system/admin/login
+      - /system/admin/send-captcha
       - /system/admin/register
       - /system/admin/info
       - /admin/logout

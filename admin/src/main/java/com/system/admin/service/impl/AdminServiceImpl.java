@@ -10,12 +10,16 @@ import com.system.admin.model.Admin;
 import com.system.admin.model.AdminRoleRelation;
 import com.system.admin.model.Resource;
 import com.system.admin.model.Role;
+import com.system.admin.param.LoginParam;
 import com.system.admin.param.ModifyAdminParam;
 import com.system.admin.service.IAdminService;
+import com.system.admin.util.MailMsg;
 import com.system.common.exception.Asserts;
 import com.system.security.util.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +28,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
+import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,17 +54,25 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private AdminRoleRelationMapper adminRoleRelationMapper;
+    @Autowired
+    private RedisTemplate redisTemplate;
+    @Autowired
+    private MailMsg mailMsg;
+
     /**
      * 登录
      *
-     * @param admin
+     * @param loginParam
      * @return
      */
     @Override
-    public String login(Admin admin) {
-        String username = admin.getUsername();
-        String password = admin.getPasswd();
+    public String login(LoginParam loginParam) {
+        String username = loginParam.getUsername();
+        String password = loginParam.getPasswd();
+        String email = loginParam.getEmail();
+        String captcha = loginParam.getCaptcha();
         String token = null;
+        Object object = redisTemplate.opsForValue().get(email);
         try {
             UserDetails userDetails = loadUserByUsername(username);
             if(!passwordEncoder.matches(password,userDetails.getPassword())){
@@ -66,6 +80,12 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             }
             if(!userDetails.isEnabled()){
                 Asserts.fail("帐号已被禁用");
+            }
+            if(!StringUtils.isNotBlank((String)redisTemplate.opsForValue().get(email))){
+                Asserts.fail("未获取验证码");
+            }
+            if(!captcha.equals((String) redisTemplate.opsForValue().get(email))){
+                Asserts.fail("验证码错误");
             }
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -174,5 +194,15 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         admin.setName(param.getNickname());
         int rows =adminMapper.updateById(admin);
         return rows > 0;
+    }
+
+    @Override
+    public boolean send(String email) throws MessagingException {
+        String code = (String) redisTemplate.opsForValue().get(email);
+        if((StringUtils.isNotBlank(code))){
+            return false;
+        }
+        boolean b = mailMsg.mail(email);
+        return b;
     }
 }

@@ -23,8 +23,10 @@ public class RedisConfig {
         template.setKeySerializer(RedisSerializer.string());
         template.setHashKeySerializer(RedisSerializer.string());
         // 设置Value的序列化
-        template.setValueSerializer(jsonRedisSerializer);
-        template.setHashValueSerializer(jsonRedisSerializer);
+//        template.setValueSerializer(jsonRedisSerializer);
+//        template.setHashValueSerializer(jsonRedisSerializer);
+        template.setValueSerializer(RedisSerializer.string());
+        template.setHashValueSerializer(RedisSerializer.string());
         // 返回
         return template;
     }

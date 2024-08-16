@@ -29,34 +29,43 @@ public class AutoPreserveTask {
     private GeneratePreOrderSender generatePreOrderSender;
     @Autowired
     private EquipmentMapper equipmentMapper;
-    @Scheduled(cron = "0 */10 * * * ?")
-    public void executeTask(){
-        while (true) {
+
+    private final RateLimiter rateLimiter = RateLimiter.create(300);
+    private static boolean running = true;
+
+    @Scheduled(cron = "0 */1 * * * ?")
+
+    public void executeTask() {
+        if(running) {
+            running = false;
             Instant start = Instant.now();
             LocalDateTime now = LocalDateTime.now();
             List<Integer> list = equipmentMapper.selectIdByStatus(now);
-            int count = 0;
-            RateLimiter rateLimiter = RateLimiter.create(150);
-            rateLimiter.acquire(); // 这将阻塞，直到可以发送消息
             List<Integer> batchList = new ArrayList<>();
-            for (int i = 0; i < list.size(); i++) {
+            int count = 0;
+
+            for (int id : list) {
                 if (count < 12) {
-                    batchList.add(list.get(i));
+                    batchList.add(id);
                     count++;
                 } else {
-                    // 发送消息逻辑
+                    rateLimiter.acquire(); // 限流
                     generatePreOrderSender.sendPreOrder(batchList);
-                    count=0;
+                    count = 0;
                     batchList = new ArrayList<>();
-                    batchList.add(list.get(i));
+                    batchList.add(id);
                     count++;
-
                 }
             }
-            generatePreOrderSender.sendPreOrder(batchList);
 
+            if (!batchList.isEmpty()) {
+                rateLimiter.acquire(); // 限流
+                generatePreOrderSender.sendPreOrder(batchList);
+            }
 
-//        List<Equipment> equipmentList = new ArrayList<>();
+            log.info("Task executed in {} ms", Instant.now().toEpochMilli() - start.toEpochMilli());
+        }
+        //        List<Equipment> equipmentList = new ArrayList<>();
 //        for (Equipment equipment : list) {
 
 //            if(count==3){
@@ -84,6 +93,5 @@ public class AutoPreserveTask {
 //        }
 //
 //
-        }
     }
 }

@@ -3,9 +3,11 @@ package com.system.admin.service;
 import com.system.admin.model.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.system.admin.model.Role;
+import com.system.admin.param.LoginParam;
 import com.system.admin.param.ModifyAdminParam;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ import java.util.List;
 public interface IAdminService extends IService<Admin> {
 
 
-    String login(Admin admin);
+    String login(LoginParam loginParam);
 
     UserDetails loadUserByUsername(String username);
 
@@ -31,4 +33,6 @@ public interface IAdminService extends IService<Admin> {
     List<Role> getRoleList(Integer adminId);
 
     Boolean modifyById(Integer id, ModifyAdminParam param);
+
+    boolean send(String email) throws MessagingException;
 }

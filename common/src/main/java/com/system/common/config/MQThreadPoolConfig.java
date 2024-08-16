@@ -11,9 +11,9 @@ public class MQThreadPoolConfig {
     @Bean
     public Executor taskExecutor() {
         // 核心线程数
-        int corePoolSize = 2;
+        int corePoolSize = 10;
         // 最大线程数
-        int maximumPoolSize = 4;
+        int maximumPoolSize = 16;
         // 线程空闲时间（秒）
         long keepAliveTime = 60;
         // 时间单位
